@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{C919DEF0-2954-4875-8B30-D059FA86B488}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Infoware.Consola.Base</RootNamespace>
+    <AssemblyName>Infoware.Consola.Base</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Infoware.Consola.Base.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Infoware.Consola.Base.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\dlls\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\dlls\Microsoft.Office.Interop.Outlook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\dlls\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\Excel.vb" />
+    <Compile Include="Clases\GrupoOpcion.vb" />
+    <Compile Include="Clases\ISistema.vb" />
+    <Compile Include="Clases\MenuHelper.vb" />
+    <Compile Include="Clases\Opcion.vb" />
+    <Compile Include="Clases\Sistema.vb" />
+    <Compile Include="FormasBase\DataGridViewAutoDiscover.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmAcercade.Designer.vb">
+      <DependentUpon>FrmAcercade.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmAcercade.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmAyuda.Designer.vb">
+      <DependentUpon>FrmAyuda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmAyuda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmFormaBase.Designer.vb">
+      <DependentUpon>FrmFormaBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmFormaBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmListaBase.Designer.vb">
+      <DependentUpon>FrmListaBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmListaBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmListaSimpleBase.Designer.vb">
+      <DependentUpon>FrmListaSimpleBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmListaSimpleBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmDialogoBase.Designer.vb">
+      <DependentUpon>FrmDialogoBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmDialogoBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmMantenimientoBase.Designer.vb">
+      <DependentUpon>FrmMantenimientoBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmMantenimientoBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmMantenimientoSimpleBase.Designer.vb">
+      <DependentUpon>FrmMantenimientoSimpleBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmMantenimientoSimpleBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmPrincipal.designer.vb">
+      <DependentUpon>FrmPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\FrmReporteBase.designer.vb">
+      <DependentUpon>FrmReporteBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormasBase\FrmReporteBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormasBase\IOpcion.vb" />
+    <Compile Include="IAplicacion.vb" />
+    <Compile Include="ISupportsEdit.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormasBase\FrmAcercade.resx">
+      <DependentUpon>FrmAcercade.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormasBase\FrmAyuda.resx">
+      <DependentUpon>FrmAyuda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormasBase\FrmFormaBase.resx">
+      <DependentUpon>FrmFormaBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormasBase\FrmListaBase.resx">
+      <DependentUpon>FrmListaBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormasBase\FrmListaSimpleBase.resx">
+      <DependentUpon>FrmListaSimpleBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormasBase\FrmMantenimientoBase.resx">
+      <DependentUpon>FrmMantenimientoBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormasBase\FrmMantenimientoSimpleBase.resx">
+      <DependentUpon>FrmMantenimientoSimpleBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormasBase\FrmPrincipal.resx">
+      <DependentUpon>FrmPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormasBase\FrmReporteBase.resx">
+      <DependentUpon>FrmReporteBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infoware.Controles.Base\Infoware.Controles.Base.vbproj">
+      <Project>{C81D0A59-F9B2-450B-A59D-5AEF7AE898C1}</Project>
+      <Name>Infoware.Controles.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infoware.Datos\Infoware.Datos.vbproj">
+      <Project>{FA50218A-1FD3-4739-87EB-4E77591EE0A2}</Project>
+      <Name>Infoware.Datos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infoware.Docking\Infoware.Docking.csproj">
+      <Project>{7660CB57-8692-47EA-A000-A17DE0C12258}</Project>
+      <Name>Infoware.Docking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infoware.Reglas.General\Infoware.Reglas.General.vbproj">
+      <Project>{FEDDE9A5-923F-47F7-B7AC-63BEAA34E7F8}</Project>
+      <Name>Infoware.Reglas.General</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infoware.Reglas\Infoware.Reglas.vbproj">
+      <Project>{8365B169-5835-4CC6-B9F3-91DD27AE4E1A}</Project>
+      <Name>Infoware.Reglas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infoware.Reportes\Infoware.Reportes.vbproj">
+      <Project>{288345C5-9FD4-4AC9-A9D1-D42BC9AD3316}</Project>
+      <Name>Infoware.Reportes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\docexcel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\attach.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\docword.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eliminar.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refrescar.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\abrir.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nuevo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saveandnew.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Formato.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\acrobat.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ayuda.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fullscreen.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrowfirst.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrowlast.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\post16.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
