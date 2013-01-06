@@ -612,10 +612,11 @@ Public Class FrmLista
     If _dstotalizar IsNot Nothing AndAlso _dstotalizar.Rows.Count > 0 Then
       For Each _row As DataRow In _dstotalizar.Rows
         Dim _struct As StructExcel = _StructExcelList.Devolver(_row(0))
-
-        For t As Integer = 1 To _dstotalizar.Columns.Count - 1 Step 2
+        For Each campo As String In CStr(_row(1)).Split(">")
           Dim _structtotalizar As New StructTotalizar
-          Select Case CStr(_row(t)).ToUpper.Trim
+          Dim operador As String = campo.Substring(0, campo.IndexOf("|"))
+          Dim numcampo As Integer = CInt(campo.Substring(campo.IndexOf("|") + 1))
+          Select Case operador
             Case "SUMA"
               _structtotalizar.Funcion = EnumFuncion.Suma
             Case "PROMEDIO"
@@ -627,7 +628,7 @@ Public Class FrmLista
             Case "MINIMO"
               _structtotalizar.Funcion = EnumFuncion.Minimo
           End Select
-          _structtotalizar.Campo = CInt(_row(t + 1))
+          _structtotalizar.Campo = numcampo
           _struct.Totalizar.Add(_structtotalizar)
         Next
       Next
