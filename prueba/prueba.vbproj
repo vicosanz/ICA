@@ -13,7 +13,7 @@
     <AssemblyName>prueba</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <PublishUrl>publish\</PublishUrl>
@@ -137,6 +137,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infoware.Controles.Base\Infoware.Controles.Base.vbproj">
+      <Project>{C81D0A59-F9B2-450B-A59D-5AEF7AE898C1}</Project>
+      <Name>Infoware.Controles.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infoware.Datos\Infoware.Datos.vbproj">
       <Project>{FA50218A-1FD3-4739-87EB-4E77591EE0A2}</Project>
       <Name>Infoware.Datos</Name>

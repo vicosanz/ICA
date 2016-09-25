@@ -4,6 +4,7 @@ Imports System.Xml
 Imports System.Xml.Serialization
 Imports System.IO
 Imports System.Data.Common
+Imports System.Collections.Generic
 
 #Region "OperadorDatos"
 <XmlInclude(GetType(OperadorDatos))> _
@@ -26,7 +27,10 @@ Public Class SQLOperadorDatos
   <XmlIgnore()> _
   Public Overrides ReadOnly Property CadenaConexion() As String
     Get
-      Return String.Format("Data Source={0};Initial Catalog={1};Persist Security Info={2};User ID={3};Password={4}", Servidor, Base, IIf(SeguridadIntegrada, "yes", "no"), Usuario, ClaveAux)
+      If SeguridadIntegrada Then
+        Return String.Format("Server={0};Database={1};Trusted_Connection=True;", Servidor, Base)
+      End If
+      Return String.Format("Server={0};Database={1};User Id={2};Password={3};", Servidor, Base, Usuario, ClaveAux)
     End Get
   End Property
 
@@ -60,6 +64,8 @@ Public Class SQLOperadorDatos
   Private mDataAdapter As SqlDataAdapter
   Private mTransaccion As SqlTransaction
   Private mComando As SqlCommand
+  Private mComandoXMLTransaccion As List(Of OperadorDatosComando)
+  Private mComandoXML As OperadorDatosComando
   Private mEstaenTransaccion As Boolean = False
 #End Region
 
@@ -90,6 +96,33 @@ Public Class SQLOperadorDatos
     End Get
   End Property
 
+  <XmlIgnore()> _
+  Public Overrides Property ComandoXML() As OperadorDatosComando
+    Get
+      If mComandoXML Is Nothing Then
+        mComandoXML = New OperadorDatosComando
+      End If
+      Return mComandoXML
+    End Get
+    Set(value As OperadorDatosComando)
+      Comando.Parameters.Clear()
+      For Each _param As OperadorDatosComandoParametro In value.Parametros
+        AgregarParametro(_param.Nombre, _param.Valor)
+      Next
+      Procedimiento = value.Procedimiento
+    End Set
+  End Property
+
+  <XmlIgnore()> _
+  Public ReadOnly Property ComandoXMLTransaccion() As List(Of OperadorDatosComando)
+    Get
+      If mComandoXMLTransaccion Is Nothing Then
+        mComandoXMLTransaccion = New List(Of OperadorDatosComando)
+      End If
+      Return mComandoXMLTransaccion
+    End Get
+  End Property
+
 #Region "Transacciones"
   Public Overrides Function ComenzarTransaccion() As Boolean
     Try
@@ -117,6 +150,11 @@ Public Class SQLOperadorDatos
       mTransaccion.Commit()
       mComando.Transaction = Nothing
       mEstaenTransaccion = False
+
+      For Each _comando As OperadorDatosComando In ComandoXMLTransaccion
+        _comando.SerializeList(DirectorioReplicacion, SufijoReplicacion)
+      Next
+      ComandoXMLTransaccion.Clear()
     Catch ex As Exception
       mMsgError = ex.Message
       Me.OnDataOperationError(New OperadorDatosErrorEventArgs(ex, "OperadorDatos"))
@@ -137,6 +175,7 @@ Public Class SQLOperadorDatos
       mTransaccion.Rollback()
       mComando.Transaction = Nothing
       mEstaenTransaccion = False
+      ComandoXMLTransaccion.Clear()
     Catch ex As Exception
       mMsgError = ex.Message
       Me.OnDataOperationError(New OperadorDatosErrorEventArgs(ex, "OperadorDatos"))
@@ -227,6 +266,16 @@ Public Class SQLOperadorDatos
       _estaabierta = Conexion.State = ConnectionState.Open
       If Not _estaabierta Then Conexion.Open()
       mComando.ExecuteNonQuery()
+
+      'Guardar ejecución
+      If ReplicarComando AndAlso Not String.IsNullOrWhiteSpace(DirectorioReplicacion) Then
+        mComandoXML.Procedimiento = mProcedimiento
+        If EstaenTransaccion Then
+          ComandoXMLTransaccion.Add(mComandoXML)
+        Else
+          mComandoXML.SerializeList(DirectorioReplicacion, SufijoReplicacion)
+        End If
+      End If
     Catch ex As Exception
       mMsgError = ex.Message
       Me.OnDataOperationError(New OperadorDatosErrorEventArgs(ex, "OperadorDatos"))
@@ -247,6 +296,16 @@ Public Class SQLOperadorDatos
       _estaabierta = Conexion.State = ConnectionState.Open
       If Not _estaabierta Then Conexion.Open()
       obj = mComando.ExecuteScalar
+
+      'Guardar ejecución
+      If ReplicarComando AndAlso Not String.IsNullOrWhiteSpace(DirectorioReplicacion) Then
+        mComandoXML.Procedimiento = mProcedimiento
+        If EstaenTransaccion Then
+          ComandoXMLTransaccion.Add(mComandoXML)
+        Else
+          mComandoXML.SerializeList(DirectorioReplicacion, SufijoReplicacion)
+        End If
+      End If
     Catch ex As Exception
       mMsgError = ex.Message
       Me.OnDataOperationError(New OperadorDatosErrorEventArgs(ex, "OperadorDatos"))
@@ -294,6 +353,7 @@ Public Class SQLOperadorDatos
     sqlparam.ParameterName = nombre
     sqlparam.Direction = ParameterDirection.Input
     Comando.Parameters.Add(sqlparam)
+    ComandoXML.Parametros.Add(New OperadorDatosComandoParametro(nombre, valor))
   End Sub
 
   Public Overrides Sub AgregarParametroImagen(ByVal nombre As String, ByVal Imagen As String)
@@ -318,6 +378,8 @@ Public Class SQLOperadorDatos
 
   Public Overrides Sub LimpiarParametros()
     mComando.Parameters.Clear()
+    mComandoXML = New OperadorDatosComando
+    ReplicarComando = False
   End Sub
 
   Sub New()

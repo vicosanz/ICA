@@ -1,5 +1,6 @@
 ﻿Imports Infoware.Consola.Base
 Imports Infoware.Docking
+Imports Infoware.Datos
 
 Public Class ToolBoxModulos
   Private mSistemas As New SistemaList
@@ -190,7 +191,7 @@ Public Class ToolBoxModulos
   Public Event CambioFavoritos As EventHandler
 
   Private Sub btnfavoritos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnfavoritos.Click
-   
+
   End Sub
 
   Private Sub AgregarAFavoritosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AgregarAFavoritosToolStripMenuItem.Click
@@ -217,5 +218,16 @@ Public Class ToolBoxModulos
       _opcion.Restriccion.Guardar()
       RaiseEvent CambioFavoritos(Me, Nothing)
     End If
+  End Sub
+
+  Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
+    For Each _nodo As TreeNode In Me.treeView1.Nodes
+      If TypeOf _nodo.Tag Is Sistema Then
+        Dim _sistema As Sistema = CType(_nodo.Tag, Sistema)
+        If Not String.IsNullOrWhiteSpace(_sistema.OperadorDatos.DirectorioReplicacion) Then
+          OperadorDatosComando.ActualizarSistema(_sistema.OperadorDatos)
+        End If
+      End If
+    Next
   End Sub
 End Class

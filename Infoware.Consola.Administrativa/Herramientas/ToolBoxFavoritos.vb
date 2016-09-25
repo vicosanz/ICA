@@ -117,7 +117,7 @@ Public Class ToolBoxFavoritos
   Public Sub CerrarSistema(ByVal _Sistema As Sistema)
     DockPanel.SuspendLayout(True)
     For Each _nodo As TreeNode In Me.treeView1.Nodes
-      If _nodo.Tag Is _Sistema Then
+      If _nodo IsNot Nothing AndAlso _nodo.Tag Is _Sistema Then
         'buscar todas las opciones y cerrar opciones
         For Each _nodogrp As TreeNode In _nodo.Nodes
           For Each _nodoopc As TreeNode In _nodogrp.Nodes

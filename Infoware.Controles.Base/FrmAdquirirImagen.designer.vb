@@ -20,18 +20,19 @@ Partial Class FrmAdquirirImagen
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmAdquirirImagen))
-    Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-    Me.btnadquirir = New System.Windows.Forms.ToolStripButton
-    Me.btnguardar = New System.Windows.Forms.ToolStripButton
-    Me.btneliminar = New System.Windows.Forms.ToolStripButton
-    Me.picfoto = New System.Windows.Forms.PictureBox
+    Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+    Me.btnadquirir = New System.Windows.Forms.ToolStripButton()
+    Me.btnguardar = New System.Windows.Forms.ToolStripButton()
+    Me.btneliminar = New System.Windows.Forms.ToolStripButton()
+    Me.picfoto = New System.Windows.Forms.PictureBox()
+    Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
     Me.ToolStrip1.SuspendLayout()
     CType(Me.picfoto, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'ToolStrip1
     '
-    Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnadquirir, Me.btnguardar, Me.btneliminar})
+    Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnadquirir, Me.btnguardar, Me.btneliminar, Me.ToolStripComboBox1})
     Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
     Me.ToolStrip1.Name = "ToolStrip1"
     Me.ToolStrip1.Size = New System.Drawing.Size(514, 25)
@@ -50,7 +51,7 @@ Partial Class FrmAdquirirImagen
     'btnguardar
     '
     Me.btnguardar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnguardar.Image = My.Resources.Resources.save.ToBitmap
+    Me.btnguardar.Image = CType(resources.GetObject("btnguardar.Image"), System.Drawing.Image)
     Me.btnguardar.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.btnguardar.Name = "btnguardar"
     Me.btnguardar.Size = New System.Drawing.Size(23, 22)
@@ -59,7 +60,7 @@ Partial Class FrmAdquirirImagen
     'btneliminar
     '
     Me.btneliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btneliminar.Image = My.Resources.Resources.eliminar.ToBitmap
+    Me.btneliminar.Image = CType(resources.GetObject("btneliminar.Image"), System.Drawing.Image)
     Me.btneliminar.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.btneliminar.Name = "btneliminar"
     Me.btneliminar.Size = New System.Drawing.Size(23, 22)
@@ -71,15 +72,21 @@ Partial Class FrmAdquirirImagen
     Me.picfoto.Dock = System.Windows.Forms.DockStyle.Fill
     Me.picfoto.Location = New System.Drawing.Point(0, 25)
     Me.picfoto.Name = "picfoto"
-    Me.picfoto.Size = New System.Drawing.Size(514, 412)
+    Me.picfoto.Size = New System.Drawing.Size(514, 354)
     Me.picfoto.TabIndex = 1
     Me.picfoto.TabStop = False
     '
+    'ToolStripComboBox1
+    '
+    Me.ToolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+    Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
+    Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 25)
+    '
     'FrmAdquirirImagen
     '
-    Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 15.0!)
+    Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-    Me.ClientSize = New System.Drawing.Size(514, 437)
+    Me.ClientSize = New System.Drawing.Size(514, 379)
     Me.Controls.Add(Me.picfoto)
     Me.Controls.Add(Me.ToolStrip1)
     Me.Name = "FrmAdquirirImagen"
@@ -98,4 +105,5 @@ Partial Class FrmAdquirirImagen
   Friend WithEvents btnguardar As System.Windows.Forms.ToolStripButton
   Friend WithEvents btneliminar As System.Windows.Forms.ToolStripButton
   Friend WithEvents picfoto As System.Windows.Forms.PictureBox
+  Friend WithEvents ToolStripComboBox1 As System.Windows.Forms.ToolStripComboBox
 End Class

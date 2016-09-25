@@ -60,6 +60,7 @@ Public Class SybaseOperadorDatos
   Private mDataAdapter As OleDbDataAdapter
   Private mTransaccion As OleDbTransaction
   Private mComando As OleDbCommand
+  Private mComandoXML As OperadorDatosComando
   Private mEstaenTransaccion As Boolean = False
 #End Region
 
@@ -88,6 +89,23 @@ Public Class SybaseOperadorDatos
       End If
       Return mComando
     End Get
+  End Property
+
+  <XmlIgnore()> _
+  Public Overrides Property ComandoXML() As OperadorDatosComando
+    Get
+      If mComandoXML Is Nothing Then
+        mComandoXML = New OperadorDatosComando
+      End If
+      Return mComandoXML
+    End Get
+    Set(value As OperadorDatosComando)
+      Comando.Parameters.Clear()
+      For Each _param As OperadorDatosComandoParametro In value.Parametros
+        AgregarParametro(_param.Nombre, _param.Valor)
+      Next
+      Procedimiento = value.Procedimiento
+    End Set
   End Property
 
 #Region "Transacciones"

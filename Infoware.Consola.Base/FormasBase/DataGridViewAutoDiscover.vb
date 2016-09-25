@@ -247,9 +247,9 @@ Public Class DataGridViewAutoDiscover
 
       Dim excelApp As New Excel.Application
       excelApp.Visible = False
+      excelApp.ScreenUpdating = False
       Dim excelBook As Excel.Workbook = excelApp.Workbooks.Add
       Dim excelWorksheet As Excel.Worksheet = CType(excelBook.Worksheets(1), Excel.Worksheet)
-      excelApp.Visible = False
       With excelWorksheet
         For t As Integer = 1 To Me.ColumnCount
           .Cells(1, t).Value = Me.Columns(t - 1).HeaderText
@@ -314,6 +314,7 @@ Public Class DataGridViewAutoDiscover
         End If
       End With
       excelApp.Visible = True
+      excelApp.ScreenUpdating = True
       'excelWorksheet.PrintPreview()
       'excelApp.Quit()
       If _output = EnumSalida.Correo Then

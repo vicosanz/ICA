@@ -51,6 +51,7 @@ Partial Class FrmListaSimpleBase
     Me.AyudaDinamicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
     Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.pnlcuerpo.SuspendLayout()
     Me.pnldatos.SuspendLayout()
     Me.HeaderStrip1.SuspendLayout()
@@ -336,6 +337,7 @@ Partial Class FrmListaSimpleBase
     Me.MainMenuStrip = Me.MenuStrip1
     Me.Name = "FrmListaSimpleBase"
     Me.Text = "Lista de "
+    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.pnlcuerpo.ResumeLayout(False)
     Me.pnldatos.ResumeLayout(False)
     Me.HeaderStrip1.ResumeLayout(False)

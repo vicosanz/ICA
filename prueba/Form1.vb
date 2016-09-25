@@ -7,32 +7,32 @@ Public Class Form1
   End Sub
 
   Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-    Dim _operadordatos As OperadorDatos = OperadorDatosFactory.CrearInstancia(enumProveedorDatos.SQL, "(local)\sqlexpress", "rednegocios", "sa", "lindoecuador", True)
-    _operadordatos.GuardarContrasena = False
+    'Dim _operadordatos As OperadorDatos = OperadorDatosFactory.CrearInstancia(enumProveedorDatos.SQL, "(local)\sqlexpress", "rednegocios", "sa", "lindoecuador", True)
+    '_operadordatos.GuardarContrasena = False
 
 
-    MsgBox(_operadordatos.CadenaConexion)
+    'MsgBox(_operadordatos.CadenaConexion)
 
-    Dim _operadordatoslist As New OperadorDatosList
-    _operadordatoslist.Add(_operadordatos)
-    _operadordatoslist.axml("prueba.xml")
+    'Dim _operadordatoslist As New OperadorDatosList
+    '_operadordatoslist.Add(_operadordatos)
+    '_operadordatoslist.axml("prueba.xml")
 
-    MsgBox("serializado")
+    'MsgBox("serializado")
 
-    _operadordatoslist = OperadorDatosList.dexml("prueba.xml")
+    '_operadordatoslist = OperadorDatosList.dexml("prueba.xml")
 
-        MsgBox("deserializado")
+    '    MsgBox("deserializado")
 
-        Dim _usuario As New Infoware.Reglas.General.Usuario(_operadordatos, "admin")
-        _usuario.Usuari_Mensaje = "cambio"
-        If Not _usuario.Guardar() Then
-            MsgBox("no guardo")
-        End If
+    '    Dim _usuario As New Infoware.Reglas.General.Usuario(_operadordatos, "admin")
+    '    _usuario.Usuari_Mensaje = "cambio"
+    '    If Not _usuario.Guardar() Then
+    '        MsgBox("no guardo")
+    '    End If
 
-        _usuario.Restricciones(0).Restri_Eliminacion = True
+    '    _usuario.Restricciones(0).Restri_Eliminacion = True
 
 
-        Dim _usuariolista As Infoware.Reglas.General.UsuarioList.obtenerlista(_operadordatos, "juan")
+    '    Dim _usuariolista As Infoware.Reglas.General.UsuarioList.obtenerlista(_operadordatos, "juan")
 
   End Sub
 End Class

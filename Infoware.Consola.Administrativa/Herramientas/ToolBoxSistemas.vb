@@ -191,4 +191,8 @@ Public Class ToolBoxSistemas
       End If
     Next
   End Sub
+
+  Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs)
+
+  End Sub
 End Class

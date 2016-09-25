@@ -48,6 +48,11 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\dlls\Microsoft.Office.Interop.Outlook.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -150,6 +155,10 @@
     <ProjectReference Include="..\Infoware.Datos\Infoware.Datos.vbproj">
       <Project>{FA50218A-1FD3-4739-87EB-4E77591EE0A2}</Project>
       <Name>Infoware.Datos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infoware.Docking\Infoware.Docking.csproj">
+      <Project>{553f6341-7a75-45fc-9513-62351e0c4333}</Project>
+      <Name>Infoware.Docking</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infoware.Reglas.General\Infoware.Reglas.General.vbproj">
       <Project>{FEDDE9A5-923F-47F7-B7AC-63BEAA34E7F8}</Project>

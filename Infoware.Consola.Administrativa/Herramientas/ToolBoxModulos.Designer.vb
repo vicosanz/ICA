@@ -22,15 +22,16 @@ Partial Class ToolBoxModulos
   'No lo modifique con el editor de código.
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
-    Me.components = New System.ComponentModel.Container
+    Me.components = New System.ComponentModel.Container()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ToolBoxModulos))
-    Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-    Me.btndesconectar = New System.Windows.Forms.ToolStripButton
-    Me.treeView1 = New System.Windows.Forms.TreeView
+    Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+    Me.btndesconectar = New System.Windows.Forms.ToolStripButton()
+    Me.btnfavoritos = New System.Windows.Forms.ToolStripDropDownButton()
+    Me.AgregarAFavoritosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    Me.QuitarDeFavoritosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    Me.treeView1 = New System.Windows.Forms.TreeView()
     Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-    Me.btnfavoritos = New System.Windows.Forms.ToolStripDropDownButton
-    Me.AgregarAFavoritosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-    Me.QuitarDeFavoritosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+    Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
     Me.ToolStrip1.SuspendLayout()
     Me.SuspendLayout()
     '
@@ -48,11 +49,33 @@ Partial Class ToolBoxModulos
     'btndesconectar
     '
     Me.btndesconectar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btndesconectar.Image = My.Resources.Resources.disconnect.ToBitmap
+    Me.btndesconectar.Image = CType(resources.GetObject("btndesconectar.Image"), System.Drawing.Image)
     Me.btndesconectar.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.btndesconectar.Name = "btndesconectar"
     Me.btndesconectar.Size = New System.Drawing.Size(23, 22)
     Me.btndesconectar.Text = "Desconectar sistema"
+    '
+    'btnfavoritos
+    '
+    Me.btnfavoritos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+    Me.btnfavoritos.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AgregarAFavoritosToolStripMenuItem, Me.QuitarDeFavoritosToolStripMenuItem})
+    Me.btnfavoritos.Image = CType(resources.GetObject("btnfavoritos.Image"), System.Drawing.Image)
+    Me.btnfavoritos.ImageTransparentColor = System.Drawing.Color.Magenta
+    Me.btnfavoritos.Name = "btnfavoritos"
+    Me.btnfavoritos.Size = New System.Drawing.Size(29, 22)
+    Me.btnfavoritos.Text = "Agregar a favoritos"
+    '
+    'AgregarAFavoritosToolStripMenuItem
+    '
+    Me.AgregarAFavoritosToolStripMenuItem.Name = "AgregarAFavoritosToolStripMenuItem"
+    Me.AgregarAFavoritosToolStripMenuItem.Size = New System.Drawing.Size(206, 24)
+    Me.AgregarAFavoritosToolStripMenuItem.Text = "Agregar a favoritos"
+    '
+    'QuitarDeFavoritosToolStripMenuItem
+    '
+    Me.QuitarDeFavoritosToolStripMenuItem.Name = "QuitarDeFavoritosToolStripMenuItem"
+    Me.QuitarDeFavoritosToolStripMenuItem.Size = New System.Drawing.Size(206, 24)
+    Me.QuitarDeFavoritosToolStripMenuItem.Text = "Quitar de favoritos"
     '
     'treeView1
     '
@@ -75,38 +98,22 @@ Partial Class ToolBoxModulos
     Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
     Me.ImageList1.Images.SetKeyName(0, "db16.ico")
     Me.ImageList1.Images.SetKeyName(1, "db16_d.ico")
+    Me.ImageList1.Images.SetKeyName(2, "Refrescar.ico")
     '
-    'btnfavoritos
+    'Timer1
     '
-    Me.btnfavoritos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnfavoritos.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AgregarAFavoritosToolStripMenuItem, Me.QuitarDeFavoritosToolStripMenuItem})
-    Me.btnfavoritos.Image = My.Resources.Resources.favorites.ToBitmap
-    Me.btnfavoritos.ImageTransparentColor = System.Drawing.Color.Magenta
-    Me.btnfavoritos.Name = "btnfavoritos"
-    Me.btnfavoritos.Size = New System.Drawing.Size(29, 22)
-    Me.btnfavoritos.Text = "Agregar a favoritos"
-    '
-    'AgregarAFavoritosToolStripMenuItem
-    '
-    Me.AgregarAFavoritosToolStripMenuItem.Name = "AgregarAFavoritosToolStripMenuItem"
-    Me.AgregarAFavoritosToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-    Me.AgregarAFavoritosToolStripMenuItem.Text = "Agregar a favoritos"
-    '
-    'QuitarDeFavoritosToolStripMenuItem
-    '
-    Me.QuitarDeFavoritosToolStripMenuItem.Name = "QuitarDeFavoritosToolStripMenuItem"
-    Me.QuitarDeFavoritosToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-    Me.QuitarDeFavoritosToolStripMenuItem.Text = "Quitar de favoritos"
+    Me.Timer1.Enabled = True
+    Me.Timer1.Interval = 60000
     '
     'ToolBoxModulos
     '
-    Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+    Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(226, 424)
     Me.Controls.Add(Me.treeView1)
     Me.Controls.Add(Me.ToolStrip1)
     Me.DockAreas = CType(((Infoware.Docking.DockAreas.Float Or Infoware.Docking.DockAreas.DockLeft) _
-                Or Infoware.Docking.DockAreas.DockRight), Infoware.Docking.DockAreas)
+            Or Infoware.Docking.DockAreas.DockRight), Infoware.Docking.DockAreas)
     Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
     Me.HideOnClose = True
@@ -125,5 +132,6 @@ Partial Class ToolBoxModulos
   Friend WithEvents btnfavoritos As System.Windows.Forms.ToolStripDropDownButton
   Friend WithEvents AgregarAFavoritosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents QuitarDeFavoritosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents Timer1 As System.Windows.Forms.Timer
 
 End Class

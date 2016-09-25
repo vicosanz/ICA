@@ -131,9 +131,9 @@ Public Class FrmListaBase
 
       Dim excelApp As New Excel.Application
       excelApp.Visible = False
+      excelApp.ScreenUpdating = False
       Dim excelBook As Excel.Workbook = excelApp.Workbooks.Add
       Dim excelWorksheet As Excel.Worksheet = CType(excelBook.Worksheets(1), Excel.Worksheet)
-      excelApp.Visible = False
       With excelWorksheet
         For t As Integer = 1 To Me.DataGridView1.ColumnCount
           .Cells(1, t).Value = Me.DataGridView1.Columns(t - 1).HeaderText
@@ -182,6 +182,7 @@ Public Class FrmListaBase
         Next
       End With
       excelApp.Visible = True
+      excelApp.ScreenUpdating = True
       'excelWorksheet.PrintPreview()
       'excelApp.Quit()
       If _output = EnumSalida.Correo Then
@@ -525,7 +526,7 @@ Public Class FrmListaBase
     Me.Close()
   End Sub
 
-  Private Sub ListBindingSource_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBindingSource.DataSourceChanged
+  Private Sub ListBindingSource_DataSourceChanged(ByVal sender As Object, ByVal e As System.EventArgs)
     Me.DataGridView1.AutoDiscover()
     If Me.ListBindingSource Is Nothing OrElse Me.ListBindingSource.Count = 0 Then
       Me.lblmensaje.Text = ""
@@ -541,7 +542,7 @@ Public Class FrmListaBase
   Public Event SeleccionoFila As EventHandler
 
 
-  Private Sub ListBindingSource_CurrentChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListBindingSource.CurrentChanged
+  Private Sub ListBindingSource_CurrentChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
     RaiseEvent SeleccionoFila(Me, Nothing)
   End Sub
 

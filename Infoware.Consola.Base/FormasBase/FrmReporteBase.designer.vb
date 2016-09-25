@@ -19,15 +19,13 @@ Partial Class FrmReporteBase
   'Do not modify it using the code editor.
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
-    Me.components = New System.ComponentModel.Container()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmReporteBase))
     Me.pnlcuerpo = New System.Windows.Forms.Panel()
     Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-    Me.HeaderStrip1 = New Infoware.Docking.HeaderStrip()
-    Me.ToolStriptitulo = New System.Windows.Forms.ToolStripLabel()
     Me.btnsalir = New Infoware.Controles.Base.ButtonStd()
     Me.Panel1 = New System.Windows.Forms.Panel()
-    Me.ListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    Me.HeaderStrip1 = New Infoware.Docking.HeaderStrip()
+    Me.ToolStriptitulo = New System.Windows.Forms.ToolStripLabel()
     Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
     Me.btnimprimir = New System.Windows.Forms.ToolStripButton()
     Me.btnexportar = New System.Windows.Forms.ToolStripButton()
@@ -42,9 +40,9 @@ Partial Class FrmReporteBase
     Me.EdicionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.AyudaDinamicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.pnlcuerpo.SuspendLayout()
     Me.HeaderStrip1.SuspendLayout()
-    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.ToolStrip1.SuspendLayout()
     Me.MenuStrip1.SuspendLayout()
     Me.SuspendLayout()
@@ -59,46 +57,27 @@ Partial Class FrmReporteBase
     Me.pnlcuerpo.Dock = System.Windows.Forms.DockStyle.Fill
     Me.pnlcuerpo.Location = New System.Drawing.Point(0, 49)
     Me.pnlcuerpo.Name = "pnlcuerpo"
-    Me.pnlcuerpo.Size = New System.Drawing.Size(770, 378)
+    Me.pnlcuerpo.Size = New System.Drawing.Size(894, 494)
     Me.pnlcuerpo.TabIndex = 0
     '
     'CrystalReportViewer1
     '
     Me.CrystalReportViewer1.ActiveViewIndex = -1
     Me.CrystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+    'Me.CrystalReportViewer1.CachedPageNumberPerDoc = 10
     Me.CrystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default
     Me.CrystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
     Me.CrystalReportViewer1.Location = New System.Drawing.Point(0, 91)
     Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
-    Me.CrystalReportViewer1.Size = New System.Drawing.Size(770, 287)
+    Me.CrystalReportViewer1.Size = New System.Drawing.Size(894, 403)
     Me.CrystalReportViewer1.TabIndex = 6
     Me.CrystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
-    '
-    'HeaderStrip1
-    '
-    Me.HeaderStrip1.AutoSize = False
-    Me.HeaderStrip1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold)
-    Me.HeaderStrip1.ForeColor = System.Drawing.Color.White
-    Me.HeaderStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-    Me.HeaderStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStriptitulo})
-    Me.HeaderStrip1.Location = New System.Drawing.Point(0, 0)
-    Me.HeaderStrip1.Name = "HeaderStrip1"
-    Me.HeaderStrip1.Size = New System.Drawing.Size(770, 25)
-    Me.HeaderStrip1.TabIndex = 0
-    Me.HeaderStrip1.TabStop = True
-    Me.HeaderStrip1.Text = "HeaderStrip1"
-    '
-    'ToolStriptitulo
-    '
-    Me.ToolStriptitulo.Name = "ToolStriptitulo"
-    Me.ToolStriptitulo.Size = New System.Drawing.Size(93, 22)
-    Me.ToolStriptitulo.Text = "Reporte de"
     '
     'btnsalir
     '
     Me.btnsalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.btnsalir.DialogResult = System.Windows.Forms.DialogResult.Cancel
-    Me.btnsalir.Location = New System.Drawing.Point(683, 347)
+    Me.btnsalir.Location = New System.Drawing.Point(807, 463)
     Me.btnsalir.Name = "btnsalir"
     Me.btnsalir.Size = New System.Drawing.Size(75, 23)
     Me.btnsalir.TabIndex = 4
@@ -113,15 +92,35 @@ Partial Class FrmReporteBase
     Me.Panel1.Location = New System.Drawing.Point(0, 25)
     Me.Panel1.Name = "Panel1"
     Me.Panel1.Padding = New System.Windows.Forms.Padding(5, 4, 5, 4)
-    Me.Panel1.Size = New System.Drawing.Size(770, 66)
+    Me.Panel1.Size = New System.Drawing.Size(894, 66)
     Me.Panel1.TabIndex = 5
+    '
+    'HeaderStrip1
+    '
+    Me.HeaderStrip1.AutoSize = False
+    Me.HeaderStrip1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold)
+    Me.HeaderStrip1.ForeColor = System.Drawing.Color.White
+    Me.HeaderStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+    Me.HeaderStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStriptitulo})
+    Me.HeaderStrip1.Location = New System.Drawing.Point(0, 0)
+    Me.HeaderStrip1.Name = "HeaderStrip1"
+    Me.HeaderStrip1.Size = New System.Drawing.Size(894, 25)
+    Me.HeaderStrip1.TabIndex = 0
+    Me.HeaderStrip1.TabStop = True
+    Me.HeaderStrip1.Text = "HeaderStrip1"
+    '
+    'ToolStriptitulo
+    '
+    Me.ToolStriptitulo.Name = "ToolStriptitulo"
+    Me.ToolStriptitulo.Size = New System.Drawing.Size(93, 22)
+    Me.ToolStriptitulo.Text = "Reporte de"
     '
     'ToolStrip1
     '
     Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnimprimir, Me.btnexportar, Me.ToolStripSeparator2, Me.ToolStripButtonAyuda})
     Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
     Me.ToolStrip1.Name = "ToolStrip1"
-    Me.ToolStrip1.Size = New System.Drawing.Size(770, 25)
+    Me.ToolStrip1.Size = New System.Drawing.Size(894, 25)
     Me.ToolStrip1.TabIndex = 0
     Me.ToolStrip1.Text = "ToolStrip1"
     '
@@ -162,7 +161,7 @@ Partial Class FrmReporteBase
     Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArchivoToolStripMenuItem, Me.EdicionToolStripMenuItem, Me.AyudaToolStripMenuItem})
     Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
     Me.MenuStrip1.Name = "MenuStrip1"
-    Me.MenuStrip1.Size = New System.Drawing.Size(770, 24)
+    Me.MenuStrip1.Size = New System.Drawing.Size(894, 24)
     Me.MenuStrip1.TabIndex = 3
     Me.MenuStrip1.Text = "MenuStrip1"
     '
@@ -240,17 +239,17 @@ Partial Class FrmReporteBase
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.CancelButton = Me.btnsalir
-    Me.ClientSize = New System.Drawing.Size(770, 427)
+    Me.ClientSize = New System.Drawing.Size(894, 543)
     Me.Controls.Add(Me.pnlcuerpo)
     Me.Controls.Add(Me.ToolStrip1)
     Me.Controls.Add(Me.MenuStrip1)
     Me.MainMenuStrip = Me.MenuStrip1
     Me.Name = "FrmReporteBase"
     Me.Text = "Reporte de"
+    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.pnlcuerpo.ResumeLayout(False)
     Me.HeaderStrip1.ResumeLayout(False)
     Me.HeaderStrip1.PerformLayout()
-    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ToolStrip1.ResumeLayout(False)
     Me.ToolStrip1.PerformLayout()
     Me.MenuStrip1.ResumeLayout(False)
@@ -262,7 +261,6 @@ Partial Class FrmReporteBase
   Friend WithEvents HeaderStrip1 As Infoware.Docking.HeaderStrip
   Friend WithEvents ToolStriptitulo As System.Windows.Forms.ToolStripLabel
   Friend WithEvents btnimprimir As System.Windows.Forms.ToolStripButton
-  Public WithEvents ListBindingSource As System.Windows.Forms.BindingSource
   Public WithEvents pnlcuerpo As System.Windows.Forms.Panel
   Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
   Friend WithEvents btnsalir As Infoware.Controles.Base.ButtonStd

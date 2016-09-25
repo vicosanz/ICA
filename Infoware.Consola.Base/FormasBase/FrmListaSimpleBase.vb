@@ -164,17 +164,8 @@ Public Class FrmListaSimpleBase
 
       Dim excelApp As New Excel.Application
       excelApp.Visible = False
+      excelApp.ScreenUpdating = False
       Dim excelBook As Excel.Workbook = excelApp.Workbooks.Add
-
-      'Dim _primera As Boolean = True
-      'For Each _sheet As Excel.Worksheet In excelBook.Worksheets
-      '  If Not _primera Then
-      '    _sheet.Delete()
-      '  End If
-      '  _primera = False
-      'Next
-
-      excelApp.Visible = False
       Dim _esTxt As Boolean = False
 
       Dim idtab As Integer = 0
@@ -182,10 +173,10 @@ Public Class FrmListaSimpleBase
         Dim dg As DataGridView = _tab.Controls(0)
         Dim excelWorksheet As Excel.Worksheet
 
-        If idtab <= 2 Then
+        If idtab + 1 <= excelBook.Worksheets.Count Then
           excelWorksheet = excelBook.Worksheets(idtab + 1)
         Else
-          excelWorksheet = excelBook.Worksheets.Add(After:=excelBook.Worksheets(3))
+          excelWorksheet = excelBook.Worksheets.Add(After:=excelBook.Worksheets(idtab))
         End If
         'CType(excelBook.Worksheets(1), Excel.Worksheet)
         With excelWorksheet
@@ -208,7 +199,9 @@ Public Class FrmListaSimpleBase
                 .Cells(1, icol).Value = dg.Columns(t - 1).HeaderText
                 .Columns(icol).columnwidth = IIf(dg.Columns(t - 1).Width / 6.8 > 255, 255, dg.Columns(t - 1).Width / 6.8)
 
-                If Not _output = EnumSalida.MailMerge AndAlso (data.Columns(t - 1).DataType Is GetType(Decimal) Or data.Columns(t - 1).DataType Is GetType(Double)) Then
+                If dg.Columns(t - 1).HeaderText.ToUpper.IndexOf("FECHA_HORA") >= 0 Then
+                  .Columns(icol).numberformat = "m/d/yy h:mm;@"
+                ElseIf Not _output = EnumSalida.MailMerge AndAlso (data.Columns(t - 1).DataType Is GetType(Decimal) Or data.Columns(t - 1).DataType Is GetType(Double)) Then
                   .Columns(icol).numberformat = "0.00" '& Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator & "00"
                 ElseIf Not _output = EnumSalida.MailMerge AndAlso (data.Columns(t - 1).DataType Is GetType(Integer) Or data.Columns(t - 1).DataType Is GetType(Byte)) Then
                   .Columns(icol).numberformat = "0"
@@ -227,34 +220,47 @@ Public Class FrmListaSimpleBase
             _fila = -1
           End If
 
-          For Each _row As DataRow In data.Rows
-            _fila += 1
-            Dim icol As Integer = 1
-            For t As Integer = 1 To dg.ColumnCount
-              If Not dg.Columns(t - 1).HeaderText.Chars(0) = "_" Then
-                Dim valor As Object
-                valor = _row(t - 1)
-                If TypeOf valor Is Boolean Then
-                  .Cells(_fila + 1, icol).Value = IIf(CBool(valor), "Sí", "No")
-                ElseIf TypeOf valor Is System.Array Then
-                Else
-                  If Not TypeOf valor Is DBNull Then
-                    If _output = EnumSalida.MailMerge AndAlso (data.Columns(t - 1).DataType Is GetType(Decimal) Or data.Columns(t - 1).DataType Is GetType(Double)) Then
-                      .Cells(_fila + 1, icol).value = Val(valor).ToString("0.00")
-                    ElseIf _output = EnumSalida.MailMerge AndAlso (data.Columns(t - 1).DataType Is GetType(Integer) Or data.Columns(t - 1).DataType Is GetType(Byte)) Then
-                      .Cells(_fila + 1, icol).value = Val(valor).ToString("0")
-                      'ElseIf Not _output = EnumSalida.MailMerge AndAlso data.Columns(t - 1).DataType Is GetType(System.DateTime) Then
-                      '.Cells(_fila + 1, icol).value = Val(valor)
-                    Else 'data.Columns(t - 1).DataType Is GetType(String) Or data.Columns(t - 1).DataType Is GetType(Boolean) Then
-                      .Cells(_fila + 1, icol).Value = valor
+          If data.Rows.Count > 3000 OrElse TabControl1.TabPages.Count > 3 Then
+            If data.Rows.Count > 0 Then
+              dg.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+              dg.SelectAll()
+              Dim dataobj As DataObject = dg.GetClipboardContent
+              Clipboard.SetDataObject(dataobj, True)
+              dg.ClearSelection()
+              .Cells(_fila + 2, 1).select()
+              .Paste()
+            End If
+          Else
+
+            For Each _row As DataRow In data.Rows
+              _fila += 1
+              Dim icol As Integer = 1
+              For t As Integer = 1 To dg.ColumnCount
+                If Not dg.Columns(t - 1).HeaderText.Chars(0) = "_" Then
+                  Dim valor As Object
+                  valor = _row(t - 1)
+                  If TypeOf valor Is Boolean Then
+                    .Cells(_fila + 1, icol).Value = IIf(CBool(valor), "Sí", "No")
+                  ElseIf TypeOf valor Is System.Array Then
+                  Else
+                    If Not TypeOf valor Is DBNull Then
+                      If _output = EnumSalida.MailMerge AndAlso (data.Columns(t - 1).DataType Is GetType(Decimal) Or data.Columns(t - 1).DataType Is GetType(Double)) Then
+                        .Cells(_fila + 1, icol).value = Val(valor).ToString("0.00")
+                      ElseIf _output = EnumSalida.MailMerge AndAlso (data.Columns(t - 1).DataType Is GetType(Integer) Or data.Columns(t - 1).DataType Is GetType(Byte)) Then
+                        .Cells(_fila + 1, icol).value = Val(valor).ToString("0")
+                      ElseIf _output = EnumSalida.MailMerge AndAlso data.Columns(t - 1).DataType Is GetType(System.DateTime) Then
+                        .Cells(_fila + 1, icol).value = Format(valor, My.Application.Culture.DateTimeFormat.ShortDatePattern)
+                      Else 'data.Columns(t - 1).DataType Is GetType(String) Or data.Columns(t - 1).DataType Is GetType(Boolean) Then
+                        .Cells(_fila + 1, icol).Value = valor
+                      End If
                     End If
+                    '.Cells(_fila + 1, icol).Value = valor
                   End If
-                  '.Cells(_fila + 1, icol).Value = valor
+                  icol += 1
                 End If
-                icol += 1
-              End If
+              Next
             Next
-          Next
+          End If
 
           If Not _esTxt Then
             .Cells(1, 1).AutoFormat(Format:=Excel.XlRangeAutoFormat.xlRangeAutoFormatList3, Number:=True, Font:=True, Alignment:=True, Border:=True, Pattern:=True, Width:=True)
@@ -352,6 +358,15 @@ Public Class FrmListaSimpleBase
               End With
             Next
 
+            pospivot = 0
+            For Each _pivot As String In _struct.TablaDinamica.PivotsPage
+              With tabla.PivotFields(_pivot)
+                .Orientation = Excel.XlPivotFieldOrientation.xlPageField
+                pospivot += 1
+                .Position = pospivot
+              End With
+            Next
+
             For Each _item As StructCampoTablaDinamica In _struct.TablaDinamica.Campos
               Dim proceso As Excel.XlConsolidationFunction = Excel.XlConsolidationFunction.xlCount
               Select Case _item.Funcion
@@ -376,7 +391,11 @@ Public Class FrmListaSimpleBase
               End If
             Next
 
-            tabla.Format(Excel.XlPivotFormatType.xlReport1)
+            If _struct.TablaDinamica.DataPivotFieldasColumn Then
+              tabla.DataPivotField.Orientation = XlPivotFieldOrientation.xlColumnField
+            End If
+
+            'tabla.Format(Excel.XlPivotFormatType.xlReport1)
             excelBook.ShowPivotTableFieldList = False
           End If
 
@@ -414,7 +433,7 @@ Public Class FrmListaSimpleBase
         idtab += 1
       Next
       excelBook.Worksheets(1).select()
-
+      excelApp.ScreenUpdating = True
       'excelWorksheet.PrintPreview()
       'excelApp.Quit()
       If _esTxt Then
@@ -428,7 +447,7 @@ Public Class FrmListaSimpleBase
         End Try
 
         excelApp.Visible = False
-        excelApp.ActiveWorkbook.SaveAs(Filename:=_salida, FileFormat:=Excel.XlFileFormat.xlUnicodeText, CreateBackup:=False)
+        excelApp.ActiveWorkbook.SaveAs(Filename:=_salida, FileFormat:=Excel.XlFileFormat.xlTextMSDOS, CreateBackup:=False)
         Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Txt")
         excelApp.ActiveWorkbook.Close(False)
         excelApp.Quit()
@@ -453,9 +472,9 @@ Public Class FrmListaSimpleBase
         Dim rutfte As String = ""
 
         If String.IsNullOrEmpty(_archivosalida) Then
-          rutfte = String.Format("{0}{1}", My.Computer.FileSystem.GetTempFileName, ".xls")
+          rutfte = String.Format("{0}{1}", My.Computer.FileSystem.GetTempFileName.ToLower.Replace(".tmp", ""), ".xlsx")
         Else
-          rutfte = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, _archivosalida + ".xls")
+          rutfte = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, _archivosalida + ".xlsx")
           Dim ok As Boolean = False
           Dim intento As Integer = 0
           While Not ok
@@ -466,7 +485,7 @@ Public Class FrmListaSimpleBase
               Catch ex As Exception
                 ok = False
                 intento += 1
-                rutfte = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, _archivosalida + intento.ToString.Trim + ".xls")
+                rutfte = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, _archivosalida + intento.ToString.Trim + ".xlsx")
               End Try
             Else
               ok = True
@@ -482,7 +501,7 @@ Public Class FrmListaSimpleBase
         Return rutfte
 
       ElseIf _output = EnumSalida.MailMerge Then
-        Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xls"
+        Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xlsx"
         Try
           If My.Computer.FileSystem.FileExists(rutfte) Then
             Kill(rutfte)
@@ -708,10 +727,10 @@ Public Class FrmListaSimpleBase
     End Set
   End Property
 
-  Public Sub EnviarAutoMail()
+  Public Sub EnviarAutoMail(Optional OriginalMessage As Microsoft.Office.Interop.Outlook.MailItem = Nothing)
     RaiseEvent Actualizar(Me, Nothing)
 
-    If String.IsNullOrEmpty(AutoMailLista) Then
+    If String.IsNullOrEmpty(AutoMailLista) AndAlso OriginalMessage Is Nothing Then
       Exit Sub
     End If
 
@@ -724,12 +743,16 @@ Public Class FrmListaSimpleBase
     Dim oApp As Outlook._Application
     oApp = New Outlook.Application()
     Dim oMsg As Outlook._MailItem
-    oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
-    oMsg.Subject = AutoMailAsunto
-    oMsg.Body = Me.Text
-    oMsg.To = AutoMailLista
+    If OriginalMessage IsNot Nothing Then
+      oMsg = OriginalMessage.ReplyAll
+    Else
+      oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
+      oMsg.Subject = AutoMailAsunto
+      oMsg.Body = Me.Text
+      oMsg.To = AutoMailLista
+    End If
 
-    Dim sDisplayName As String = "Archivo.xls"
+    Dim sDisplayName As String = "Archivo.xlsx"
     Dim sBodyLen As String = oMsg.Body.Length
     Dim oAttachs As Outlook.Attachments = oMsg.Attachments
     Dim oAttach As Outlook.Attachment

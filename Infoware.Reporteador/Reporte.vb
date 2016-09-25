@@ -51,7 +51,7 @@ Public Class Reporte
 
   Public ReadOnly Property NombreGrupo() As String
     Get
-      Dim nombre As String = mNombreProcedimiento.Substring(4).Replace("_", " ")
+      Dim nombre As String = mNombreProcedimiento.Substring(mNombreProcedimiento.IndexOf("_") + 1).Replace("_", " ")
       If Not nombre.Contains("$") Then
         Return String.Empty
       Else
@@ -62,7 +62,7 @@ Public Class Reporte
 
   Public ReadOnly Property NombreReporte() As String
     Get
-      Dim nombre As String = mNombreProcedimiento.Substring(4).Replace("_", " ")
+      Dim nombre As String = mNombreProcedimiento.Substring(mNombreProcedimiento.IndexOf("_") + 1).Replace("_", " ")
       If Not nombre.Contains("$") Then
         Return nombre
       Else

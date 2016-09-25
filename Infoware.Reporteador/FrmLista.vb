@@ -2,6 +2,7 @@ Imports Infoware.Datos
 Imports Infoware.Reglas
 Imports Infoware.Reglas.General
 Imports Infoware.Consola.Base
+Imports Microsoft.Office.Interop
 'Imports WWTS.General.Reglas
 'Imports WWTS.Reporteador.Reglas
 Imports System.Windows.Forms
@@ -49,12 +50,15 @@ Public Class FrmLista
   End Property
 
   Private mEnviarMailAutomaticoyCerrar As Boolean = False
-  Public Property EnviarMailAutomaticoyCerrar() As Boolean
+  Private mOriginalMessage As Microsoft.Office.Interop.Outlook.MailItem = Nothing
+
+  Public Property EnviarMailAutomaticoyCerrar(Optional OriginalMessage As Microsoft.Office.Interop.Outlook.MailItem = Nothing) As Boolean
     Get
       Return mEnviarMailAutomaticoyCerrar
     End Get
     Set(ByVal value As Boolean)
       mEnviarMailAutomaticoyCerrar = value
+      mOriginalMessage = OriginalMessage
     End Set
   End Property
 
@@ -443,12 +447,13 @@ Public Class FrmLista
               End If
             End If
             If TypeOf _control Is Infoware.Controles.Base.DateTimePickerStd Then
-              CType(_control, Infoware.Controles.Base.DateTimePickerStd).Value = mValores(t)
+              CType(_control, Infoware.Controles.Base.DateTimePickerStd).Value = CDate(mValores(t))
             End If
             If TypeOf _control Is Infoware.Controles.Base.CheckBoxStd Then
               CType(_control, Infoware.Controles.Base.CheckBoxStd).Checked = mValores(t)
             End If
             If TypeOf _control Is ComboBox Then
+              Actualizar_combos(Me, Nothing)
               CType(_control, ComboBox).SelectedValue = mValores(t)
             End If
           End If
@@ -578,6 +583,7 @@ Public Class FrmLista
         Dim _structTablasDinamicas As New StructTablaDinamica
         _structTablasDinamicas.Pivots = New List(Of String)
         _structTablasDinamicas.PivotsColumns = New List(Of String)
+        _structTablasDinamicas.PivotsPage = New List(Of String)
         _structTablasDinamicas.Campos = New List(Of StructCampoTablaDinamica)
 
         For t As Integer = 1 To _dspivot.Columns.Count - 1 Step 3
@@ -585,6 +591,10 @@ Public Class FrmLista
             _structTablasDinamicas.Pivots.Add(CStr(_dspivot.Rows(0)(t + 1)).Trim)
           ElseIf CStr(_dspivot.Rows(0)(t)).Trim.ToUpper = "PIVOTCOLUMN" Then
             _structTablasDinamicas.PivotsColumns.Add(CStr(_dspivot.Rows(0)(t + 1)).Trim)
+          ElseIf CStr(_dspivot.Rows(0)(t)).Trim.ToUpper = "DATAPIVOTFIELDASCOLUMN" Then
+            _structTablasDinamicas.DataPivotFieldasColumn = True
+          ElseIf CStr(_dspivot.Rows(0)(t)).Trim.ToUpper = "PIVOTPAGE" Then
+            _structTablasDinamicas.PivotsPage.Add(CStr(_dspivot.Rows(0)(t + 1)).Trim)
           Else
             Dim _structcampotabladinamica As New StructCampoTablaDinamica
             _structcampotabladinamica.Campo = CStr(_dspivot.Rows(0)(t + 1)).Trim
@@ -818,7 +828,7 @@ Public Class FrmLista
       Me.AutoMailArchivo = mReporte.RetornarEmailArchivo
       Me.AutoMailLista = mReporte.RetornarEmailLista
 
-      Me.EnviarAutoMail()
+      Me.EnviarAutoMail(mOriginalMessage)
       Me.Close()
     End If
     Me.tmrdatos.Enabled = False

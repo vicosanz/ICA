@@ -22,13 +22,13 @@ Partial Class ToolBoxSistemas
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-    Me.components = New System.ComponentModel.Container
+    Me.components = New System.ComponentModel.Container()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ToolBoxSistemas))
-    Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-    Me.btnadd = New System.Windows.Forms.ToolStripButton
-    Me.btndel = New System.Windows.Forms.ToolStripButton
-    Me.btneditar = New System.Windows.Forms.ToolStripButton
-    Me.treeView1 = New System.Windows.Forms.TreeView
+    Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+    Me.btnadd = New System.Windows.Forms.ToolStripButton()
+    Me.btndel = New System.Windows.Forms.ToolStripButton()
+    Me.btneditar = New System.Windows.Forms.ToolStripButton()
+    Me.treeView1 = New System.Windows.Forms.TreeView()
     Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
     Me.ToolStrip1.SuspendLayout()
     Me.SuspendLayout()
@@ -47,7 +47,7 @@ Partial Class ToolBoxSistemas
     'btnadd
     '
     Me.btnadd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btnadd.Image = My.Resources.Resources.databaseadd.ToBitmap
+    Me.btnadd.Image = CType(resources.GetObject("btnadd.Image"), System.Drawing.Image)
     Me.btnadd.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.btnadd.Name = "btnadd"
     Me.btnadd.Size = New System.Drawing.Size(23, 22)
@@ -56,7 +56,7 @@ Partial Class ToolBoxSistemas
     'btndel
     '
     Me.btndel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btndel.Image = My.Resources.Resources.databaseremove.ToBitmap
+    Me.btndel.Image = CType(resources.GetObject("btndel.Image"), System.Drawing.Image)
     Me.btndel.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.btndel.Name = "btndel"
     Me.btndel.Size = New System.Drawing.Size(23, 22)
@@ -65,7 +65,7 @@ Partial Class ToolBoxSistemas
     'btneditar
     '
     Me.btneditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.btneditar.Image = My.Resources.Resources.databaseedit.ToBitmap
+    Me.btneditar.Image = CType(resources.GetObject("btneditar.Image"), System.Drawing.Image)
     Me.btneditar.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.btneditar.Name = "btneditar"
     Me.btneditar.Size = New System.Drawing.Size(23, 22)
@@ -94,13 +94,13 @@ Partial Class ToolBoxSistemas
     '
     'ToolBoxSistemas
     '
-    Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+    Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 17.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(226, 424)
     Me.Controls.Add(Me.treeView1)
     Me.Controls.Add(Me.ToolStrip1)
     Me.DockAreas = CType(((Infoware.Docking.DockAreas.Float Or Infoware.Docking.DockAreas.DockLeft) _
-                Or Infoware.Docking.DockAreas.DockRight), Infoware.Docking.DockAreas)
+            Or Infoware.Docking.DockAreas.DockRight), Infoware.Docking.DockAreas)
     Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
     Me.HideOnClose = True

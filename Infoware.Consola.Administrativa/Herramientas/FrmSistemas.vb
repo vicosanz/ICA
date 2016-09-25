@@ -44,8 +44,11 @@ Public Class FrmSistemas
       Me.cboservidor.Text = mSistema.OperadorDatos.Servidor
       Me.txtnombreusuariobd.Text = mSistema.OperadorDatos.Usuario
       Me.txtcontrasenabd.Text = mSistema.OperadorDatos.Clave
+      Me.chkSeguridadIntegrada.Checked = mSistema.OperadorDatos.SeguridadIntegrada
       Me.txtbasedatos.Text = mSistema.OperadorDatos.Base
       Me.chkguardarcontrasenabd.Checked = mSistema.OperadorDatos.GuardarContrasena
+      Me.txtDirectorioReplicacion.Text = mSistema.OperadorDatos.DirectorioReplicacion
+      Me.txtSufijoReplicacion.Text = mSistema.OperadorDatos.SufijoReplicacion
     End If
 
     If Not String.IsNullOrEmpty(Me.txtnombreusuario.Text) Then
@@ -62,7 +65,14 @@ Public Class FrmSistemas
     mSistema.Cargaraliniciar = Me.chkguardarcontrasena.Checked And Me.chkcargaraliniciar.Checked
 
     mSistema.Ensamblado = Me.txtarchivoensamblado.Text
-    mSistema.OperadorDatos = OperadorDatosFactory.CrearInstancia(Me.cboproveedor.ComboBoxStd1.SelectedIndex, Me.cboservidor.Text, Me.txtbasedatos.Text, Me.txtnombreusuariobd.Text, Me.txtcontrasenabd.Text, Me.chkguardarcontrasenabd.Checked)
+    mSistema.OperadorDatos = OperadorDatosFactory.CrearInstancia(Me.cboproveedor.ComboBoxStd1.SelectedIndex, Me.cboservidor.Text, Me.txtbasedatos.Text, Me.txtnombreusuariobd.Text, Me.txtcontrasenabd.Text, Me.chkSeguridadIntegrada.Checked)
+    mSistema.OperadorDatos.DirectorioReplicacion = Me.txtDirectorioReplicacion.Text
+    mSistema.OperadorDatos.SufijoReplicacion = Me.txtSufijoReplicacion.Text
+    If Not String.IsNullOrWhiteSpace(Me.txtDirectorioReplicacion.Text) Then
+      If Not My.Computer.FileSystem.DirectoryExists(Me.txtDirectorioReplicacion.Text) OrElse String.IsNullOrWhiteSpace(Me.txtSufijoReplicacion.Text) Then
+        Throw New Exception("Debe ingresar un directorio de replicación váldo y un Sufijo")
+      End If
+    End If
     'mSistema.OperadorDatos.Usuario = Me.txtnombreusuariobd.Text
     'mSistema.OperadorDatos.Clave = Me.txtcontrasenabd.Text
     'mSistema.OperadorDatos.Servidor = Me.cboservidor.Text
@@ -157,4 +167,16 @@ Public Class FrmSistemas
   Private Sub cboproveedor_Load(sender As System.Object, e As System.EventArgs) Handles cboproveedor.Load
 
   End Sub
+
+  Private Sub chkSeguridadIntegrada_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkSeguridadIntegrada.CheckedChanged
+    Me.txtnombreusuariobd.Enabled = Not Me.chkSeguridadIntegrada.Checked
+    Me.txtcontrasenabd.Enabled = Not Me.chkSeguridadIntegrada.Checked
+  End Sub
+
+  Private Sub ButtonStd1_Click(sender As System.Object, e As System.EventArgs) Handles ButtonStd1.Click
+    If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
+      txtDirectorioReplicacion.Text = FolderBrowserDialog1.SelectedPath
+    End If
+  End Sub
+
 End Class

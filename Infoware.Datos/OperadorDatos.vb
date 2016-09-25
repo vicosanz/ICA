@@ -24,6 +24,9 @@ Public MustInherit Class OperadorDatos
   Private mBase As String = String.Empty
   Private mSeguridadIntegrada As Boolean = True
   Private mGuardarContrasena As Boolean = True
+  Private mDirectorioReplicacion As String = String.Empty
+  Private mSufijoReplicacion As String = String.Empty
+  Private mReplicarComando As Boolean = True
 #End Region
 
 #Region "Propiedades"
@@ -124,6 +127,36 @@ Public MustInherit Class OperadorDatos
     End Set
   End Property
 
+  <XmlAttribute()> _
+  Public Property DirectorioReplicacion() As String
+    Get
+      Return mDirectorioReplicacion
+    End Get
+    Set(ByVal value As String)
+      mDirectorioReplicacion = value
+    End Set
+  End Property
+
+  <XmlAttribute()> _
+  Public Property SufijoReplicacion() As String
+    Get
+      Return mSufijoReplicacion
+    End Get
+    Set(ByVal value As String)
+      mSufijoReplicacion = value
+    End Set
+  End Property
+
+  <XmlIgnore()> _
+  Public Property ReplicarComando() As Boolean
+    Get
+      Return mReplicarComando
+    End Get
+    Set(ByVal value As Boolean)
+      mReplicarComando = value
+    End Set
+  End Property
+
   <XmlIgnore()> _
   MustOverride ReadOnly Property CadenaConexion() As String
 
@@ -136,6 +169,7 @@ Public MustInherit Class OperadorDatos
   <XmlIgnore()> _
   MustOverride ReadOnly Property Descripcion() As String
 
+
 #End Region
 
 #Region "Métodos"
@@ -144,6 +178,9 @@ Public MustInherit Class OperadorDatos
 
   <XmlIgnore()> _
   MustOverride ReadOnly Property Comando() As DbCommand
+
+  <XmlIgnore()> _
+  MustOverride Property ComandoXML() As OperadorDatosComando
 
   MustOverride Function ComenzarTransaccion() As Boolean
 

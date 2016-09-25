@@ -289,6 +289,7 @@ Public Class ParametroDet
     If EsNuevo Then
       sAccion = "I"
     End If
+    OperadorDatos.ReplicarComando = True
     OperadorDatos.AgregarParametro("@accion", sAccion)
     OperadorDatos.AgregarParametro("@Parame_Codigo", Parame_Codigo)
     OperadorDatos.AgregarParametro("@Pardet_Secuencia", Pardet_Secuencia)
@@ -346,6 +347,7 @@ Public Class ParametroDet
       Return True
     End If
     Dim bReturn As Boolean = True
+    OperadorDatos.ReplicarComando = True
     OperadorDatos.AgregarParametro("@accion", "E")
     OperadorDatos.AgregarParametro("@Parame_Codigo", Parame_Codigo)
     OperadorDatos.AgregarParametro("@Pardet_Secuencia", Pardet_Secuencia)

@@ -22,6 +22,9 @@ Partial Class FrmFormaBase
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+    Me.components = New System.ComponentModel.Container()
+    Me.ListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.SuspendLayout()
     '
     'FrmFormaBase
@@ -33,7 +36,9 @@ Partial Class FrmFormaBase
     Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     Me.Name = "FrmFormaBase"
     Me.Text = "FrmFormaBase"
+    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.ResumeLayout(False)
 
   End Sub
+  Public WithEvents ListBindingSource As System.Windows.Forms.BindingSource
 End Class

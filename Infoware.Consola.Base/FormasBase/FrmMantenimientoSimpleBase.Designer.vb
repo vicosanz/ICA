@@ -19,22 +19,21 @@ Partial Class FrmMantenimientoSimpleBase
   'Do not modify it using the code editor.
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
-    Me.components = New System.ComponentModel.Container
-    Me.ListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.HeaderStrip1 = New Infoware.Docking.HeaderStrip
-    Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel
-    Me.pnlcuerpo = New System.Windows.Forms.Panel
-    Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-    Me.btnguardar = New System.Windows.Forms.ToolStripButton
-    Me.btnguardarnuevo = New System.Windows.Forms.ToolStripButton
-    Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
-    Me.ToolStripButtonAyuda = New System.Windows.Forms.ToolStripButton
-    Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
-    Me.ArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-    Me.GuardarCambiosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-    Me.EdicionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-    Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-    Me.AyudaDinamicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMantenimientoSimpleBase))
+    Me.HeaderStrip1 = New Infoware.Docking.HeaderStrip()
+    Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+    Me.pnlcuerpo = New System.Windows.Forms.Panel()
+    Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+    Me.btnguardar = New System.Windows.Forms.ToolStripButton()
+    Me.btnguardarnuevo = New System.Windows.Forms.ToolStripButton()
+    Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+    Me.ToolStripButtonAyuda = New System.Windows.Forms.ToolStripButton()
+    Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+    Me.ArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    Me.GuardarCambiosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    Me.EdicionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    Me.AyudaDinamicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.HeaderStrip1.SuspendLayout()
     Me.pnlcuerpo.SuspendLayout()
@@ -58,7 +57,7 @@ Partial Class FrmMantenimientoSimpleBase
     'ToolStripLabel1
     '
     Me.ToolStripLabel1.Name = "ToolStripLabel1"
-    Me.ToolStripLabel1.Size = New System.Drawing.Size(51, 31)
+    Me.ToolStripLabel1.Size = New System.Drawing.Size(50, 22)
     Me.ToolStripLabel1.Text = "Tabla"
     '
     'pnlcuerpo
@@ -81,20 +80,20 @@ Partial Class FrmMantenimientoSimpleBase
     '
     'btnguardar
     '
-    Me.btnguardar.Image = My.Resources.Resources.save.ToBitmap
+    Me.btnguardar.Image = CType(resources.GetObject("btnguardar.Image"), System.Drawing.Image)
     Me.btnguardar.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.btnguardar.MergeIndex = 0
     Me.btnguardar.Name = "btnguardar"
-    Me.btnguardar.Size = New System.Drawing.Size(107, 22)
+    Me.btnguardar.Size = New System.Drawing.Size(117, 22)
     Me.btnguardar.Text = "Guardar cambios"
     '
     'btnguardarnuevo
     '
-    Me.btnguardarnuevo.Image = My.Resources.Resources.saveandnew.ToBitmap
+    Me.btnguardarnuevo.Image = CType(resources.GetObject("btnguardarnuevo.Image"), System.Drawing.Image)
     Me.btnguardarnuevo.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.btnguardarnuevo.MergeIndex = 1
     Me.btnguardarnuevo.Name = "btnguardarnuevo"
-    Me.btnguardarnuevo.Size = New System.Drawing.Size(108, 22)
+    Me.btnguardarnuevo.Size = New System.Drawing.Size(114, 22)
     Me.btnguardarnuevo.Text = "Guardar y nuevo"
     Me.btnguardarnuevo.Visible = False
     '
@@ -108,7 +107,7 @@ Partial Class FrmMantenimientoSimpleBase
     'ToolStripButtonAyuda
     '
     Me.ToolStripButtonAyuda.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-    Me.ToolStripButtonAyuda.Image = My.Resources.Resources.help.ToBitmap
+    Me.ToolStripButtonAyuda.Image = CType(resources.GetObject("ToolStripButtonAyuda.Image"), System.Drawing.Image)
     Me.ToolStripButtonAyuda.ImageTransparentColor = System.Drawing.Color.Magenta
     Me.ToolStripButtonAyuda.MergeAction = System.Windows.Forms.MergeAction.Insert
     Me.ToolStripButtonAyuda.MergeIndex = 99
@@ -131,17 +130,17 @@ Partial Class FrmMantenimientoSimpleBase
     Me.ArchivoToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
     Me.ArchivoToolStripMenuItem.MergeIndex = 0
     Me.ArchivoToolStripMenuItem.Name = "ArchivoToolStripMenuItem"
-    Me.ArchivoToolStripMenuItem.Size = New System.Drawing.Size(55, 20)
+    Me.ArchivoToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
     Me.ArchivoToolStripMenuItem.Text = "&Archivo"
     '
     'GuardarCambiosToolStripMenuItem
     '
-    Me.GuardarCambiosToolStripMenuItem.Image = My.Resources.Resources.save.ToBitmap
+    Me.GuardarCambiosToolStripMenuItem.Image = CType(resources.GetObject("GuardarCambiosToolStripMenuItem.Image"), System.Drawing.Image)
     Me.GuardarCambiosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
     Me.GuardarCambiosToolStripMenuItem.MergeIndex = 1
     Me.GuardarCambiosToolStripMenuItem.Name = "GuardarCambiosToolStripMenuItem"
     Me.GuardarCambiosToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.G), System.Windows.Forms.Keys)
-    Me.GuardarCambiosToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+    Me.GuardarCambiosToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
     Me.GuardarCambiosToolStripMenuItem.Text = "&Guardar cambios"
     '
     'EdicionToolStripMenuItem
@@ -149,7 +148,7 @@ Partial Class FrmMantenimientoSimpleBase
     Me.EdicionToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Replace
     Me.EdicionToolStripMenuItem.MergeIndex = 1
     Me.EdicionToolStripMenuItem.Name = "EdicionToolStripMenuItem"
-    Me.EdicionToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
+    Me.EdicionToolStripMenuItem.Size = New System.Drawing.Size(58, 20)
     Me.EdicionToolStripMenuItem.Text = "&Edición"
     '
     'AyudaToolStripMenuItem
@@ -158,12 +157,12 @@ Partial Class FrmMantenimientoSimpleBase
     Me.AyudaToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
     Me.AyudaToolStripMenuItem.MergeIndex = 5
     Me.AyudaToolStripMenuItem.Name = "AyudaToolStripMenuItem"
-    Me.AyudaToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
+    Me.AyudaToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
     Me.AyudaToolStripMenuItem.Text = "Ay&uda"
     '
     'AyudaDinamicaToolStripMenuItem
     '
-    Me.AyudaDinamicaToolStripMenuItem.Image = My.Resources.Resources.help.ToBitmap
+    Me.AyudaDinamicaToolStripMenuItem.Image = CType(resources.GetObject("AyudaDinamicaToolStripMenuItem.Image"), System.Drawing.Image)
     Me.AyudaDinamicaToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
     Me.AyudaDinamicaToolStripMenuItem.MergeIndex = 1
     Me.AyudaDinamicaToolStripMenuItem.Name = "AyudaDinamicaToolStripMenuItem"
@@ -193,7 +192,6 @@ Partial Class FrmMantenimientoSimpleBase
     Me.PerformLayout()
 
   End Sub
-  Friend WithEvents ListBindingSource As System.Windows.Forms.BindingSource
   Friend WithEvents HeaderStrip1 As Infoware.Docking.HeaderStrip
   Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
   Friend WithEvents btnguardar As System.Windows.Forms.ToolStripButton

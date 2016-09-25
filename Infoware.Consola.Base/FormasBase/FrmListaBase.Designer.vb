@@ -25,9 +25,6 @@ Partial Class FrmListaBase
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmListaBase))
     Me.pnlcuerpo = New System.Windows.Forms.Panel()
     Me.DataGridView1 = New Infoware.Consola.Base.DataGridViewAutoDiscover()
-    Me.DataGridViewTextBoxColumn37 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.ListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.DataGridViewTextBoxColumn38 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.LinkAgregar = New System.Windows.Forms.LinkLabel()
     Me.Panel1 = New System.Windows.Forms.Panel()
     Me.HeaderStrip1 = New Infoware.Docking.HeaderStrip()
@@ -36,6 +33,11 @@ Partial Class FrmListaBase
     Me.btnbuscar = New System.Windows.Forms.ToolStripButton()
     Me.combobuscar = New System.Windows.Forms.ToolStripComboBox()
     Me.btnsalir = New Infoware.Controles.Base.ButtonStd()
+    Me.DataGridViewTextBoxColumn40 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DataGridViewTextBoxColumn41 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DataGridViewTextBoxColumn39 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DataGridViewTextBoxColumn38 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+    Me.DataGridViewTextBoxColumn37 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.DataGridViewTextBoxColumn36 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.DataGridViewTextBoxColumn35 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.DataGridViewTextBoxColumn34 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -104,9 +106,9 @@ Partial Class FrmListaBase
     Me.ActualizarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.AyudaDinamicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.pnlcuerpo.SuspendLayout()
     CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.HeaderStrip1.SuspendLayout()
     Me.ToolStrip1.SuspendLayout()
     Me.MenuStrip1.SuspendLayout()
@@ -145,7 +147,6 @@ Partial Class FrmListaBase
     DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
     Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
     Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-    Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn38})
     Me.DataGridView1.DataSource = Me.ListBindingSource
     DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
@@ -166,21 +167,6 @@ Partial Class FrmListaBase
     Me.DataGridView1.Size = New System.Drawing.Size(778, 424)
     Me.DataGridView1.StandardTab = True
     Me.DataGridView1.TabIndex = 1
-    '
-    'DataGridViewTextBoxColumn37
-    '
-    Me.DataGridViewTextBoxColumn37.HeaderText = "No existen registros a presentar"
-    Me.DataGridViewTextBoxColumn37.Name = "DataGridViewTextBoxColumn37"
-    Me.DataGridViewTextBoxColumn37.ReadOnly = True
-    '
-    'ListBindingSource
-    '
-    '
-    'DataGridViewTextBoxColumn38
-    '
-    Me.DataGridViewTextBoxColumn38.HeaderText = "No existen registros a presentar"
-    Me.DataGridViewTextBoxColumn38.Name = "DataGridViewTextBoxColumn38"
-    Me.DataGridViewTextBoxColumn38.ReadOnly = True
     '
     'LinkAgregar
     '
@@ -261,6 +247,35 @@ Partial Class FrmListaBase
     Me.btnsalir.TabStop = False
     Me.btnsalir.Text = "Salir"
     Me.btnsalir.UseVisualStyleBackColor = True
+    '
+    'DataGridViewTextBoxColumn40
+    '
+    Me.DataGridViewTextBoxColumn40.HeaderText = "No existen registros a presentar"
+    Me.DataGridViewTextBoxColumn40.Name = "DataGridViewTextBoxColumn40"
+    Me.DataGridViewTextBoxColumn40.ReadOnly = True
+    '
+    'DataGridViewTextBoxColumn41
+    '
+    Me.DataGridViewTextBoxColumn41.HeaderText = "No existen registros a presentar"
+    Me.DataGridViewTextBoxColumn41.Name = "DataGridViewTextBoxColumn41"
+    '
+    'DataGridViewTextBoxColumn39
+    '
+    Me.DataGridViewTextBoxColumn39.HeaderText = "No existen registros a presentar"
+    Me.DataGridViewTextBoxColumn39.Name = "DataGridViewTextBoxColumn39"
+    Me.DataGridViewTextBoxColumn39.ReadOnly = True
+    '
+    'DataGridViewTextBoxColumn38
+    '
+    Me.DataGridViewTextBoxColumn38.HeaderText = "No existen registros a presentar"
+    Me.DataGridViewTextBoxColumn38.Name = "DataGridViewTextBoxColumn38"
+    Me.DataGridViewTextBoxColumn38.ReadOnly = True
+    '
+    'DataGridViewTextBoxColumn37
+    '
+    Me.DataGridViewTextBoxColumn37.HeaderText = "No existen registros a presentar"
+    Me.DataGridViewTextBoxColumn37.Name = "DataGridViewTextBoxColumn37"
+    Me.DataGridViewTextBoxColumn37.ReadOnly = True
     '
     'DataGridViewTextBoxColumn36
     '
@@ -769,9 +784,9 @@ Partial Class FrmListaBase
     Me.MainMenuStrip = Me.MenuStrip1
     Me.Name = "FrmListaBase"
     Me.Text = "Lista de "
+    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.pnlcuerpo.ResumeLayout(False)
     CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-    CType(Me.ListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
     Me.HeaderStrip1.ResumeLayout(False)
     Me.HeaderStrip1.PerformLayout()
     Me.ToolStrip1.ResumeLayout(False)
@@ -791,7 +806,6 @@ Partial Class FrmListaBase
   Friend WithEvents btnrefrescar As System.Windows.Forms.ToolStripButton
   Friend WithEvents btnbuscar As System.Windows.Forms.ToolStripButton
   Friend WithEvents btncancelarbuscar As System.Windows.Forms.ToolStripButton
-  Public WithEvents ListBindingSource As System.Windows.Forms.BindingSource
   Public WithEvents combobuscar As System.Windows.Forms.ToolStripComboBox
   Public WithEvents pnlcuerpo As System.Windows.Forms.Panel
   Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
@@ -864,4 +878,7 @@ Partial Class FrmListaBase
   Friend WithEvents btnseleccionar As System.Windows.Forms.ToolStripButton
   Friend WithEvents DataGridViewTextBoxColumn37 As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents DataGridViewTextBoxColumn38 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DataGridViewTextBoxColumn39 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DataGridViewTextBoxColumn40 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DataGridViewTextBoxColumn41 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

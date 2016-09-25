@@ -38,6 +38,8 @@
   Public Structure StructTablaDinamica
     Public Pivots As List(Of String)
     Public PivotsColumns As List(Of String)
+    Public PivotsPage As List(Of String)
+    Public DataPivotFieldasColumn As Boolean
     Public Campos As List(Of StructCampoTablaDinamica)
   End Structure
 
@@ -76,6 +78,7 @@
   Sub New()
     Subtotales = New List(Of StructSubtotales)
     TablaDinamica = New StructTablaDinamica
+    TablaDinamica.DataPivotFieldasColumn = False
     Totalizar = New List(Of StructTotalizar)
     Graficar = New StructGraficar
   End Sub
