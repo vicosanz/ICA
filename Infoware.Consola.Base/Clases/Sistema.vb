@@ -163,9 +163,19 @@ Public Class Sistema
 
   Public Function Probarconexion() As Boolean Implements ISistema.Probarconexion
     Try
+      If SeguridadWindows Then
+        mUsuarioString = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()
+      Else
+        If mUsuarioString.Contains("\") Then
+          Throw New Exception("No se permite la utilización del signo \ fuera del contexto de la Seguridad de Windows")
+        End If
+      End If
+
       mUsuario = New Usuario(OperadorDatos, mUsuarioString)
-      If Not mUsuario.VerificarPassword(mContrasenaString) Then
-        Throw New Exception("Error al autenticarse" & Environment.NewLine & "Posibles causas:" & Environment.NewLine & "Revise que tenga acceso al servidor, que el servidor de datos este activo " & Environment.NewLine & "y además que el usuario y la clave sean correctas")
+      If Not SeguridadWindows Then
+        If Not mUsuario.VerificarPassword(mContrasenaString) Then
+          Throw New Exception("Error al autenticarse" & Environment.NewLine & "Posibles causas:" & Environment.NewLine & "Revise que tenga acceso al servidor, que el servidor de datos este activo " & Environment.NewLine & "y además que el usuario y la clave sean correctas")
+        End If
       End If
 
       If SistemaObjeto Is Nothing Then
@@ -179,7 +189,9 @@ Public Class Sistema
   End Function
 
   Private mMensajeError As String = ""
-  <XmlIgnore()> _
+  Private mSeguridadWindows As Boolean = False
+
+  <XmlIgnore()>
   Public ReadOnly Property MensajeError() As String
     Get
       Return mMensajeError
@@ -215,6 +227,15 @@ Public Class Sistema
       End If
       Return mSistemaObjeto
     End Get
+  End Property
+
+  Public Property SeguridadWindows As Boolean
+    Get
+      Return mSeguridadWindows
+    End Get
+    Set(value As Boolean)
+      mSeguridadWindows = value
+    End Set
   End Property
 End Class
 

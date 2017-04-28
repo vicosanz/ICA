@@ -81,7 +81,7 @@ Public Class Usuario
     Me.New(_OperadorDatos, False)
     Usuari_Codigo = _Usuari_Codigo
     If Not Me.Recargar Then
-      Throw New Exception("No existe el usuario. Intente nuevamente")
+      Throw New Exception(String.Format("No existe el usuario {0}. Intente nuevamente", _Usuari_Codigo))
     End If
   End Sub
 #End Region

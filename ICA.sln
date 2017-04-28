@@ -33,8 +33,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Infoware.Reporteador", "Inf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Instaladores", "Instaladores", "{B088C63A-E297-4B62-BB96-6C168067966B}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupICA", "SetupICA\SetupICA.vdproj", "{DB9190CE-2D6E-4EB5-BE63-ACE893E1EFAD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

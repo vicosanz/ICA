@@ -25,6 +25,7 @@ Public Class FrmSistemas
   Sub llenar_datos()
     Me.txtnombresistema.Text = mSistema.NombreSistema
     Me.txtdescripcionsistema.Text = mSistema.DescripcionSistema
+    Me.chkSeguridadWindows.Checked = mSistema.SeguridadWindows
     Me.txtnombreusuario.Text = mSistema.UsuarioString
     Me.txtcontrasena.Text = mSistema.ContrasenaString
     Me.chkguardarcontrasena.Checked = mSistema.GuardarContrasena
@@ -59,6 +60,7 @@ Public Class FrmSistemas
   Sub mapear_datos()
     mSistema.NombreSistema = Me.txtnombresistema.Text
     mSistema.DescripcionSistema = Me.txtdescripcionsistema.Text
+    mSistema.SeguridadWindows = Me.chkSeguridadWindows.Checked
     mSistema.UsuarioString = Me.txtnombreusuario.Text
     mSistema.ContrasenaString = Me.txtcontrasena.Text
     mSistema.GuardarContrasena = Me.chkguardarcontrasena.Checked
@@ -89,7 +91,7 @@ Public Class FrmSistemas
       If Not mSistema.Probarconexion Then
         MsgBox(String.Format("{0} {1}", mSistema.MensajeError, mSistema.OperadorDatos.MsgError), MsgBoxStyle.Critical, "Error")
       Else
-        If mSistema.Usuario.Usuari_CambiarContrasena Then
+        If Not mSistema.SeguridadWindows AndAlso mSistema.Usuario.Usuari_CambiarContrasena Then
           Dim f As New FrmCambiarContrasena
           f.Usuario = mSistema.Usuario
           f.ShowDialog()
@@ -179,4 +181,7 @@ Public Class FrmSistemas
     End If
   End Sub
 
+  Private Sub chkSeguridadWindows_CheckedChanged(sender As Object, e As EventArgs) Handles chkSeguridadWindows.CheckedChanged
+    Me.flowUserPassword.Enabled = Not Me.chkSeguridadWindows.Checked
+  End Sub
 End Class

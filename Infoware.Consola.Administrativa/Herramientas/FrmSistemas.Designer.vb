@@ -35,7 +35,7 @@ Partial Class FrmSistemas
     Me.txtnombresistema = New Infoware.Controles.Base.LblTextBoxStd()
     Me.txtdescripcionsistema = New Infoware.Controles.Base.LblTextBoxStd()
     Me.GroupBoxHeader1 = New Infoware.Controles.Base.GroupBoxHeader()
-    Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+    Me.flowUserPassword = New System.Windows.Forms.FlowLayoutPanel()
     Me.txtnombreusuario = New Infoware.Controles.Base.LblTextBoxStd()
     Me.txtcontrasena = New Infoware.Controles.Base.LblTextBoxStd()
     Me.chkguardarcontrasena = New Infoware.Controles.Base.CheckBoxStd()
@@ -54,21 +54,23 @@ Partial Class FrmSistemas
     Me.txtcontrasenabd = New Infoware.Controles.Base.LblTextBoxStd()
     Me.chkSeguridadIntegrada = New Infoware.Controles.Base.CheckBoxStd()
     Me.chkguardarcontrasenabd = New Infoware.Controles.Base.CheckBoxStd()
-    Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
     Me.TabPage3 = New System.Windows.Forms.TabPage()
     Me.GroupBoxHeader5 = New Infoware.Controles.Base.GroupBoxHeader()
     Me.FlowLayoutPanel5 = New System.Windows.Forms.FlowLayoutPanel()
     Me.txtDirectorioReplicacion = New Infoware.Controles.Base.LblTextBoxStd()
     Me.ButtonStd1 = New Infoware.Controles.Base.ButtonStd()
-    Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
     Me.txtSufijoReplicacion = New Infoware.Controles.Base.LblTextBoxStd()
+    Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+    Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+    Me.FlowLayoutPanel6 = New System.Windows.Forms.FlowLayoutPanel()
+    Me.chkSeguridadWindows = New Infoware.Controles.Base.CheckBoxStd()
     Me.Panel1.SuspendLayout()
     Me.TabControl1.SuspendLayout()
     Me.TabPage1.SuspendLayout()
     Me.GroupBoxHeader2.SuspendLayout()
     Me.FlowLayoutPanel2.SuspendLayout()
     Me.GroupBoxHeader1.SuspendLayout()
-    Me.FlowLayoutPanel1.SuspendLayout()
+    Me.flowUserPassword.SuspendLayout()
     Me.TabPage2.SuspendLayout()
     Me.GroupBoxHeader4.SuspendLayout()
     Me.FlowLayoutPanel4.SuspendLayout()
@@ -77,6 +79,7 @@ Partial Class FrmSistemas
     Me.TabPage3.SuspendLayout()
     Me.GroupBoxHeader5.SuspendLayout()
     Me.FlowLayoutPanel5.SuspendLayout()
+    Me.FlowLayoutPanel6.SuspendLayout()
     Me.SuspendLayout()
     '
     'Panel1
@@ -88,7 +91,7 @@ Partial Class FrmSistemas
     Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
     Me.Panel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
     Me.Panel1.Location = New System.Drawing.Point(13, 431)
-    Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
     Me.Panel1.Name = "Panel1"
     Me.Panel1.Size = New System.Drawing.Size(533, 39)
     Me.Panel1.TabIndex = 1
@@ -96,7 +99,7 @@ Partial Class FrmSistemas
     'btnayuda
     '
     Me.btnayuda.Location = New System.Drawing.Point(409, 4)
-    Me.btnayuda.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.btnayuda.Margin = New System.Windows.Forms.Padding(4)
     Me.btnayuda.Name = "btnayuda"
     Me.btnayuda.Size = New System.Drawing.Size(120, 23)
     Me.btnayuda.TabIndex = 3
@@ -107,7 +110,7 @@ Partial Class FrmSistemas
     '
     Me.btncancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel
     Me.btncancelar.Location = New System.Drawing.Point(281, 4)
-    Me.btncancelar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.btncancelar.Margin = New System.Windows.Forms.Padding(4)
     Me.btncancelar.Name = "btncancelar"
     Me.btncancelar.Size = New System.Drawing.Size(120, 23)
     Me.btncancelar.TabIndex = 2
@@ -117,7 +120,7 @@ Partial Class FrmSistemas
     'btnguardar
     '
     Me.btnguardar.Location = New System.Drawing.Point(153, 4)
-    Me.btnguardar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.btnguardar.Margin = New System.Windows.Forms.Padding(4)
     Me.btnguardar.Name = "btnguardar"
     Me.btnguardar.Size = New System.Drawing.Size(120, 23)
     Me.btnguardar.TabIndex = 1
@@ -127,7 +130,7 @@ Partial Class FrmSistemas
     'btnprobar
     '
     Me.btnprobar.Location = New System.Drawing.Point(25, 4)
-    Me.btnprobar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.btnprobar.Margin = New System.Windows.Forms.Padding(4)
     Me.btnprobar.Name = "btnprobar"
     Me.btnprobar.Size = New System.Drawing.Size(120, 23)
     Me.btnprobar.TabIndex = 0
@@ -141,7 +144,7 @@ Partial Class FrmSistemas
     Me.TabControl1.Controls.Add(Me.TabPage3)
     Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
     Me.TabControl1.Location = New System.Drawing.Point(13, 12)
-    Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
     Me.TabControl1.Name = "TabControl1"
     Me.TabControl1.SelectedIndex = 0
     Me.TabControl1.Size = New System.Drawing.Size(533, 419)
@@ -153,7 +156,7 @@ Partial Class FrmSistemas
     Me.TabPage1.Controls.Add(Me.GroupBoxHeader2)
     Me.TabPage1.Controls.Add(Me.GroupBoxHeader1)
     Me.TabPage1.Location = New System.Drawing.Point(4, 25)
-    Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.TabPage1.Margin = New System.Windows.Forms.Padding(4)
     Me.TabPage1.Name = "TabPage1"
     Me.TabPage1.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
     Me.TabPage1.Size = New System.Drawing.Size(525, 390)
@@ -164,11 +167,11 @@ Partial Class FrmSistemas
     '
     Me.GroupBoxHeader2.Controls.Add(Me.FlowLayoutPanel2)
     Me.GroupBoxHeader2.Dock = System.Windows.Forms.DockStyle.Top
-    Me.GroupBoxHeader2.Location = New System.Drawing.Point(13, 156)
-    Me.GroupBoxHeader2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.GroupBoxHeader2.Location = New System.Drawing.Point(13, 175)
+    Me.GroupBoxHeader2.Margin = New System.Windows.Forms.Padding(4)
     Me.GroupBoxHeader2.Name = "GroupBoxHeader2"
     Me.GroupBoxHeader2.Padding = New System.Windows.Forms.Padding(20, 12, 4, 4)
-    Me.GroupBoxHeader2.Size = New System.Drawing.Size(499, 222)
+    Me.GroupBoxHeader2.Size = New System.Drawing.Size(499, 212)
     Me.GroupBoxHeader2.TabIndex = 4
     Me.GroupBoxHeader2.TabStop = False
     Me.GroupBoxHeader2.Text = "Sistema registrado"
@@ -180,9 +183,9 @@ Partial Class FrmSistemas
     Me.FlowLayoutPanel2.Controls.Add(Me.txtdescripcionsistema)
     Me.FlowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
     Me.FlowLayoutPanel2.Location = New System.Drawing.Point(20, 27)
-    Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(4)
     Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-    Me.FlowLayoutPanel2.Size = New System.Drawing.Size(475, 191)
+    Me.FlowLayoutPanel2.Size = New System.Drawing.Size(475, 181)
     Me.FlowLayoutPanel2.TabIndex = 1
     '
     'Label1
@@ -193,7 +196,7 @@ Partial Class FrmSistemas
     Me.Label1.Name = "Label1"
     Me.Label1.Size = New System.Drawing.Size(426, 34)
     Me.Label1.TabIndex = 2
-    Me.Label1.Text = "Puede reemplazar el nombre del sistema registrado por un nuevo nombre y descripci" & _
+    Me.Label1.Text = "Puede reemplazar el nombre del sistema registrado por un nuevo nombre y descripci" &
     "ón"
     '
     'txtnombresistema
@@ -202,7 +205,7 @@ Partial Class FrmSistemas
     Me.txtnombresistema.Direccion = Infoware.Controles.Base.enumDireccion.Abajo
     Me.txtnombresistema.esPassword = False
     Me.txtnombresistema.Location = New System.Drawing.Point(5, 39)
-    Me.txtnombresistema.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.txtnombresistema.Margin = New System.Windows.Forms.Padding(5)
     Me.txtnombresistema.MultiLine = False
     Me.txtnombresistema.Name = "txtnombresistema"
     Me.txtnombresistema.Size = New System.Drawing.Size(440, 42)
@@ -214,7 +217,7 @@ Partial Class FrmSistemas
     Me.txtdescripcionsistema.Direccion = Infoware.Controles.Base.enumDireccion.Abajo
     Me.txtdescripcionsistema.esPassword = False
     Me.txtdescripcionsistema.Location = New System.Drawing.Point(5, 91)
-    Me.txtdescripcionsistema.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.txtdescripcionsistema.Margin = New System.Windows.Forms.Padding(5)
     Me.txtdescripcionsistema.MultiLine = True
     Me.txtdescripcionsistema.Name = "txtdescripcionsistema"
     Me.txtdescripcionsistema.Size = New System.Drawing.Size(440, 60)
@@ -222,37 +225,39 @@ Partial Class FrmSistemas
     '
     'GroupBoxHeader1
     '
-    Me.GroupBoxHeader1.Controls.Add(Me.FlowLayoutPanel1)
+    Me.GroupBoxHeader1.Controls.Add(Me.flowUserPassword)
+    Me.GroupBoxHeader1.Controls.Add(Me.FlowLayoutPanel6)
     Me.GroupBoxHeader1.Dock = System.Windows.Forms.DockStyle.Top
     Me.GroupBoxHeader1.Location = New System.Drawing.Point(13, 12)
-    Me.GroupBoxHeader1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.GroupBoxHeader1.Margin = New System.Windows.Forms.Padding(4)
     Me.GroupBoxHeader1.Name = "GroupBoxHeader1"
     Me.GroupBoxHeader1.Padding = New System.Windows.Forms.Padding(20, 12, 4, 4)
-    Me.GroupBoxHeader1.Size = New System.Drawing.Size(499, 144)
+    Me.GroupBoxHeader1.Size = New System.Drawing.Size(499, 163)
     Me.GroupBoxHeader1.TabIndex = 3
     Me.GroupBoxHeader1.TabStop = False
     Me.GroupBoxHeader1.Text = "Inicio de sesión"
     '
-    'FlowLayoutPanel1
+    'flowUserPassword
     '
-    Me.FlowLayoutPanel1.Controls.Add(Me.txtnombreusuario)
-    Me.FlowLayoutPanel1.Controls.Add(Me.txtcontrasena)
-    Me.FlowLayoutPanel1.Controls.Add(Me.chkguardarcontrasena)
-    Me.FlowLayoutPanel1.Controls.Add(Me.chkcargaraliniciar)
-    Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-    Me.FlowLayoutPanel1.Location = New System.Drawing.Point(20, 27)
-    Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-    Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-    Me.FlowLayoutPanel1.Size = New System.Drawing.Size(475, 113)
-    Me.FlowLayoutPanel1.TabIndex = 1
+    Me.flowUserPassword.Controls.Add(Me.txtnombreusuario)
+    Me.flowUserPassword.Controls.Add(Me.txtcontrasena)
+    Me.flowUserPassword.Controls.Add(Me.chkguardarcontrasena)
+    Me.flowUserPassword.Controls.Add(Me.chkcargaraliniciar)
+    Me.flowUserPassword.Dock = System.Windows.Forms.DockStyle.Fill
+    Me.flowUserPassword.Location = New System.Drawing.Point(20, 56)
+    Me.flowUserPassword.Margin = New System.Windows.Forms.Padding(4)
+    Me.flowUserPassword.Name = "flowUserPassword"
+    Me.flowUserPassword.Padding = New System.Windows.Forms.Padding(20, 0, 0, 0)
+    Me.flowUserPassword.Size = New System.Drawing.Size(475, 103)
+    Me.flowUserPassword.TabIndex = 1
     '
     'txtnombreusuario
     '
     Me.txtnombreusuario.Caption = "&Nombre de usuario:"
     Me.txtnombreusuario.Direccion = Infoware.Controles.Base.enumDireccion.Derecha
     Me.txtnombreusuario.esPassword = False
-    Me.txtnombreusuario.Location = New System.Drawing.Point(5, 5)
-    Me.txtnombreusuario.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.txtnombreusuario.Location = New System.Drawing.Point(25, 5)
+    Me.txtnombreusuario.Margin = New System.Windows.Forms.Padding(5)
     Me.txtnombreusuario.MultiLine = False
     Me.txtnombreusuario.Name = "txtnombreusuario"
     Me.txtnombreusuario.Size = New System.Drawing.Size(330, 22)
@@ -263,8 +268,8 @@ Partial Class FrmSistemas
     Me.txtcontrasena.Caption = "&Contraseña:"
     Me.txtcontrasena.Direccion = Infoware.Controles.Base.enumDireccion.Derecha
     Me.txtcontrasena.esPassword = True
-    Me.txtcontrasena.Location = New System.Drawing.Point(5, 37)
-    Me.txtcontrasena.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.txtcontrasena.Location = New System.Drawing.Point(25, 37)
+    Me.txtcontrasena.Margin = New System.Windows.Forms.Padding(5)
     Me.txtcontrasena.MultiLine = False
     Me.txtcontrasena.Name = "txtcontrasena"
     Me.txtcontrasena.Size = New System.Drawing.Size(330, 22)
@@ -273,8 +278,8 @@ Partial Class FrmSistemas
     'chkguardarcontrasena
     '
     Me.chkguardarcontrasena.AutoSize = True
-    Me.chkguardarcontrasena.Location = New System.Drawing.Point(4, 68)
-    Me.chkguardarcontrasena.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.chkguardarcontrasena.Location = New System.Drawing.Point(24, 68)
+    Me.chkguardarcontrasena.Margin = New System.Windows.Forms.Padding(4)
     Me.chkguardarcontrasena.Name = "chkguardarcontrasena"
     Me.chkguardarcontrasena.Size = New System.Drawing.Size(256, 21)
     Me.chkguardarcontrasena.TabIndex = 3
@@ -285,8 +290,8 @@ Partial Class FrmSistemas
     '
     Me.chkcargaraliniciar.AutoSize = True
     Me.chkcargaraliniciar.Enabled = False
-    Me.chkcargaraliniciar.Location = New System.Drawing.Point(268, 68)
-    Me.chkcargaraliniciar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.chkcargaraliniciar.Location = New System.Drawing.Point(288, 68)
+    Me.chkcargaraliniciar.Margin = New System.Windows.Forms.Padding(4)
     Me.chkcargaraliniciar.Name = "chkcargaraliniciar"
     Me.chkcargaraliniciar.Size = New System.Drawing.Size(129, 21)
     Me.chkcargaraliniciar.TabIndex = 4
@@ -298,7 +303,7 @@ Partial Class FrmSistemas
     Me.TabPage2.Controls.Add(Me.GroupBoxHeader4)
     Me.TabPage2.Controls.Add(Me.GroupBoxHeader3)
     Me.TabPage2.Location = New System.Drawing.Point(4, 25)
-    Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
     Me.TabPage2.Name = "TabPage2"
     Me.TabPage2.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
     Me.TabPage2.Size = New System.Drawing.Size(525, 390)
@@ -310,7 +315,7 @@ Partial Class FrmSistemas
     Me.GroupBoxHeader4.Controls.Add(Me.FlowLayoutPanel4)
     Me.GroupBoxHeader4.Dock = System.Windows.Forms.DockStyle.Top
     Me.GroupBoxHeader4.Location = New System.Drawing.Point(13, 245)
-    Me.GroupBoxHeader4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.GroupBoxHeader4.Margin = New System.Windows.Forms.Padding(4)
     Me.GroupBoxHeader4.Name = "GroupBoxHeader4"
     Me.GroupBoxHeader4.Padding = New System.Windows.Forms.Padding(20, 12, 4, 4)
     Me.GroupBoxHeader4.Size = New System.Drawing.Size(499, 113)
@@ -324,7 +329,7 @@ Partial Class FrmSistemas
     Me.FlowLayoutPanel4.Controls.Add(Me.btnexaminar)
     Me.FlowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
     Me.FlowLayoutPanel4.Location = New System.Drawing.Point(20, 27)
-    Me.FlowLayoutPanel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.FlowLayoutPanel4.Margin = New System.Windows.Forms.Padding(4)
     Me.FlowLayoutPanel4.Name = "FlowLayoutPanel4"
     Me.FlowLayoutPanel4.Size = New System.Drawing.Size(475, 82)
     Me.FlowLayoutPanel4.TabIndex = 0
@@ -335,7 +340,7 @@ Partial Class FrmSistemas
     Me.txtarchivoensamblado.Direccion = Infoware.Controles.Base.enumDireccion.Derecha
     Me.txtarchivoensamblado.esPassword = False
     Me.txtarchivoensamblado.Location = New System.Drawing.Point(5, 5)
-    Me.txtarchivoensamblado.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.txtarchivoensamblado.Margin = New System.Windows.Forms.Padding(5)
     Me.txtarchivoensamblado.MultiLine = False
     Me.txtarchivoensamblado.Name = "txtarchivoensamblado"
     Me.txtarchivoensamblado.Size = New System.Drawing.Size(330, 22)
@@ -344,7 +349,7 @@ Partial Class FrmSistemas
     'btnexaminar
     '
     Me.btnexaminar.Location = New System.Drawing.Point(4, 36)
-    Me.btnexaminar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.btnexaminar.Margin = New System.Windows.Forms.Padding(4)
     Me.btnexaminar.Name = "btnexaminar"
     Me.btnexaminar.Size = New System.Drawing.Size(160, 23)
     Me.btnexaminar.TabIndex = 1
@@ -356,7 +361,7 @@ Partial Class FrmSistemas
     Me.GroupBoxHeader3.Controls.Add(Me.FlowLayoutPanel3)
     Me.GroupBoxHeader3.Dock = System.Windows.Forms.DockStyle.Top
     Me.GroupBoxHeader3.Location = New System.Drawing.Point(13, 12)
-    Me.GroupBoxHeader3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.GroupBoxHeader3.Margin = New System.Windows.Forms.Padding(4)
     Me.GroupBoxHeader3.Name = "GroupBoxHeader3"
     Me.GroupBoxHeader3.Padding = New System.Windows.Forms.Padding(20, 12, 4, 4)
     Me.GroupBoxHeader3.Size = New System.Drawing.Size(499, 233)
@@ -375,7 +380,7 @@ Partial Class FrmSistemas
     Me.FlowLayoutPanel3.Controls.Add(Me.chkguardarcontrasenabd)
     Me.FlowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
     Me.FlowLayoutPanel3.Location = New System.Drawing.Point(20, 27)
-    Me.FlowLayoutPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.FlowLayoutPanel3.Margin = New System.Windows.Forms.Padding(4)
     Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
     Me.FlowLayoutPanel3.Size = New System.Drawing.Size(475, 202)
     Me.FlowLayoutPanel3.TabIndex = 0
@@ -385,19 +390,19 @@ Partial Class FrmSistemas
     Me.cboproveedor.Caption = "Proveedor de datos:"
     Me.cboproveedor.Direccion = Infoware.Controles.Base.enumDireccion.Derecha
     Me.cboproveedor.Location = New System.Drawing.Point(5, 5)
-    Me.cboproveedor.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.cboproveedor.Margin = New System.Windows.Forms.Padding(5)
     Me.cboproveedor.Name = "cboproveedor"
-    Me.cboproveedor.Size = New System.Drawing.Size(330, 24)
+    Me.cboproveedor.Size = New System.Drawing.Size(330, 25)
     Me.cboproveedor.TabIndex = 0
     '
     'cboservidor
     '
     Me.cboservidor.Caption = "Servidor:"
     Me.cboservidor.Direccion = Infoware.Controles.Base.enumDireccion.Derecha
-    Me.cboservidor.Location = New System.Drawing.Point(5, 39)
-    Me.cboservidor.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.cboservidor.Location = New System.Drawing.Point(5, 40)
+    Me.cboservidor.Margin = New System.Windows.Forms.Padding(5)
     Me.cboservidor.Name = "cboservidor"
-    Me.cboservidor.Size = New System.Drawing.Size(330, 24)
+    Me.cboservidor.Size = New System.Drawing.Size(330, 25)
     Me.cboservidor.TabIndex = 1
     '
     'txtbasedatos
@@ -405,8 +410,8 @@ Partial Class FrmSistemas
     Me.txtbasedatos.Caption = "&Base de datos:"
     Me.txtbasedatos.Direccion = Infoware.Controles.Base.enumDireccion.Derecha
     Me.txtbasedatos.esPassword = False
-    Me.txtbasedatos.Location = New System.Drawing.Point(5, 73)
-    Me.txtbasedatos.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.txtbasedatos.Location = New System.Drawing.Point(5, 75)
+    Me.txtbasedatos.Margin = New System.Windows.Forms.Padding(5)
     Me.txtbasedatos.MultiLine = False
     Me.txtbasedatos.Name = "txtbasedatos"
     Me.txtbasedatos.Size = New System.Drawing.Size(330, 22)
@@ -417,8 +422,8 @@ Partial Class FrmSistemas
     Me.txtnombreusuariobd.Caption = "&Nombre de usuario:"
     Me.txtnombreusuariobd.Direccion = Infoware.Controles.Base.enumDireccion.Derecha
     Me.txtnombreusuariobd.esPassword = False
-    Me.txtnombreusuariobd.Location = New System.Drawing.Point(5, 105)
-    Me.txtnombreusuariobd.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.txtnombreusuariobd.Location = New System.Drawing.Point(5, 107)
+    Me.txtnombreusuariobd.Margin = New System.Windows.Forms.Padding(5)
     Me.txtnombreusuariobd.MultiLine = False
     Me.txtnombreusuariobd.Name = "txtnombreusuariobd"
     Me.txtnombreusuariobd.Size = New System.Drawing.Size(330, 22)
@@ -429,8 +434,8 @@ Partial Class FrmSistemas
     Me.txtcontrasenabd.Caption = "&Contraseña:"
     Me.txtcontrasenabd.Direccion = Infoware.Controles.Base.enumDireccion.Derecha
     Me.txtcontrasenabd.esPassword = True
-    Me.txtcontrasenabd.Location = New System.Drawing.Point(5, 137)
-    Me.txtcontrasenabd.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+    Me.txtcontrasenabd.Location = New System.Drawing.Point(5, 139)
+    Me.txtcontrasenabd.Margin = New System.Windows.Forms.Padding(5)
     Me.txtcontrasenabd.MultiLine = False
     Me.txtcontrasenabd.Name = "txtcontrasenabd"
     Me.txtcontrasenabd.Size = New System.Drawing.Size(330, 22)
@@ -439,8 +444,8 @@ Partial Class FrmSistemas
     'chkSeguridadIntegrada
     '
     Me.chkSeguridadIntegrada.AutoSize = True
-    Me.chkSeguridadIntegrada.Location = New System.Drawing.Point(4, 168)
-    Me.chkSeguridadIntegrada.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.chkSeguridadIntegrada.Location = New System.Drawing.Point(4, 170)
+    Me.chkSeguridadIntegrada.Margin = New System.Windows.Forms.Padding(4)
     Me.chkSeguridadIntegrada.Name = "chkSeguridadIntegrada"
     Me.chkSeguridadIntegrada.Size = New System.Drawing.Size(159, 21)
     Me.chkSeguridadIntegrada.TabIndex = 5
@@ -452,17 +457,13 @@ Partial Class FrmSistemas
     Me.chkguardarcontrasenabd.AutoSize = True
     Me.chkguardarcontrasenabd.Checked = True
     Me.chkguardarcontrasenabd.CheckState = System.Windows.Forms.CheckState.Checked
-    Me.chkguardarcontrasenabd.Location = New System.Drawing.Point(171, 168)
-    Me.chkguardarcontrasenabd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.chkguardarcontrasenabd.Location = New System.Drawing.Point(171, 170)
+    Me.chkguardarcontrasenabd.Margin = New System.Windows.Forms.Padding(4)
     Me.chkguardarcontrasenabd.Name = "chkguardarcontrasenabd"
     Me.chkguardarcontrasenabd.Size = New System.Drawing.Size(256, 21)
     Me.chkguardarcontrasenabd.TabIndex = 6
     Me.chkguardarcontrasenabd.Text = "&Guardar contraseña en este equipo"
     Me.chkguardarcontrasenabd.UseVisualStyleBackColor = True
-    '
-    'OpenFileDialog1
-    '
-    Me.OpenFileDialog1.FileName = "OpenFileDialog1"
     '
     'TabPage3
     '
@@ -535,6 +536,30 @@ Partial Class FrmSistemas
     Me.txtSufijoReplicacion.Size = New System.Drawing.Size(330, 22)
     Me.txtSufijoReplicacion.TabIndex = 3
     '
+    'OpenFileDialog1
+    '
+    Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+    '
+    'FlowLayoutPanel6
+    '
+    Me.FlowLayoutPanel6.Controls.Add(Me.chkSeguridadWindows)
+    Me.FlowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top
+    Me.FlowLayoutPanel6.Location = New System.Drawing.Point(20, 27)
+    Me.FlowLayoutPanel6.Name = "FlowLayoutPanel6"
+    Me.FlowLayoutPanel6.Size = New System.Drawing.Size(475, 29)
+    Me.FlowLayoutPanel6.TabIndex = 4
+    '
+    'chkSeguridadWindows
+    '
+    Me.chkSeguridadWindows.AutoSize = True
+    Me.chkSeguridadWindows.Location = New System.Drawing.Point(4, 4)
+    Me.chkSeguridadWindows.Margin = New System.Windows.Forms.Padding(4)
+    Me.chkSeguridadWindows.Name = "chkSeguridadWindows"
+    Me.chkSeguridadWindows.Size = New System.Drawing.Size(270, 21)
+    Me.chkSeguridadWindows.TabIndex = 4
+    Me.chkSeguridadWindows.Text = "&Usar Seguridad de Microsoft Windows"
+    Me.chkSeguridadWindows.UseVisualStyleBackColor = True
+    '
     'FrmSistemas
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -544,7 +569,7 @@ Partial Class FrmSistemas
     Me.Controls.Add(Me.TabControl1)
     Me.Controls.Add(Me.Panel1)
     Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-    Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+    Me.Margin = New System.Windows.Forms.Padding(4)
     Me.MaximizeBox = False
     Me.MinimizeBox = False
     Me.Name = "FrmSistemas"
@@ -557,8 +582,8 @@ Partial Class FrmSistemas
     Me.FlowLayoutPanel2.ResumeLayout(False)
     Me.FlowLayoutPanel2.PerformLayout()
     Me.GroupBoxHeader1.ResumeLayout(False)
-    Me.FlowLayoutPanel1.ResumeLayout(False)
-    Me.FlowLayoutPanel1.PerformLayout()
+    Me.flowUserPassword.ResumeLayout(False)
+    Me.flowUserPassword.PerformLayout()
     Me.TabPage2.ResumeLayout(False)
     Me.GroupBoxHeader4.ResumeLayout(False)
     Me.FlowLayoutPanel4.ResumeLayout(False)
@@ -568,6 +593,8 @@ Partial Class FrmSistemas
     Me.TabPage3.ResumeLayout(False)
     Me.GroupBoxHeader5.ResumeLayout(False)
     Me.FlowLayoutPanel5.ResumeLayout(False)
+    Me.FlowLayoutPanel6.ResumeLayout(False)
+    Me.FlowLayoutPanel6.PerformLayout()
     Me.ResumeLayout(False)
 
   End Sub
@@ -597,7 +624,7 @@ Partial Class FrmSistemas
   Friend WithEvents btnexaminar As Infoware.Controles.Base.ButtonStd
   Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
   Friend WithEvents GroupBoxHeader1 As Infoware.Controles.Base.GroupBoxHeader
-  Friend WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
+  Friend WithEvents flowUserPassword As System.Windows.Forms.FlowLayoutPanel
   Friend WithEvents txtnombreusuario As Infoware.Controles.Base.LblTextBoxStd
   Friend WithEvents txtcontrasena As Infoware.Controles.Base.LblTextBoxStd
   Friend WithEvents chkguardarcontrasena As Infoware.Controles.Base.CheckBoxStd
@@ -611,4 +638,6 @@ Partial Class FrmSistemas
   Friend WithEvents ButtonStd1 As Infoware.Controles.Base.ButtonStd
   Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
   Friend WithEvents txtSufijoReplicacion As Infoware.Controles.Base.LblTextBoxStd
+  Friend WithEvents FlowLayoutPanel6 As FlowLayoutPanel
+  Friend WithEvents chkSeguridadWindows As Controles.Base.CheckBoxStd
 End Class

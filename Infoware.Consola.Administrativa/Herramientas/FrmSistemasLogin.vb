@@ -16,6 +16,7 @@ Public Class FrmSistemasLogin
   Sub llenar_datos()
     'Me.txtnombresistema.Text = mSistema.NombreSistema
     'Me.txtdescripcionsistema.Text = mSistema.DescripcionSistema
+    Me.chkSeguridadWindows.Checked = mSistema.DirectorioRaiz
     Me.txtnombreusuario.Text = mSistema.UsuarioString
     Me.txtcontrasena.Text = mSistema.ContrasenaString
     Me.chkguardarcontrasena.Checked = mSistema.GuardarContrasena
@@ -36,6 +37,7 @@ Public Class FrmSistemasLogin
   Sub mapear_datos()
     'mSistema.NombreSistema = Me.txtnombresistema.Text
     'mSistema.DescripcionSistema = Me.txtdescripcionsistema.Text
+    mSistema.SeguridadWindows = Me.chkSeguridadWindows.Checked
     mSistema.UsuarioString = Me.txtnombreusuario.Text
     mSistema.ContrasenaString = Me.txtcontrasena.Text
     mSistema.GuardarContrasena = Me.chkguardarcontrasena.Checked
@@ -75,5 +77,9 @@ Public Class FrmSistemasLogin
     Else
       Me.PictureBox1.Image = My.Resources.Resources.integra
     End If
+  End Sub
+
+  Private Sub chkSeguridadWindows_CheckedChanged(sender As Object, e As EventArgs) Handles chkSeguridadWindows.CheckedChanged
+    FlowUserPassword.Enabled = Not Me.chkSeguridadWindows.Checked
   End Sub
 End Class
