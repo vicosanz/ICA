@@ -14,10 +14,10 @@ Public Class FrmSistemasLogin
   End Property
 
   Sub llenar_datos()
-    'Me.txtnombresistema.Text = mSistema.NombreSistema
-    'Me.txtdescripcionsistema.Text = mSistema.DescripcionSistema
-    Me.chkSeguridadWindows.Checked = mSistema.DirectorioRaiz
-    Me.txtnombreusuario.Text = mSistema.UsuarioString
+		'Me.txtnombresistema.Text = mSistema.NombreSistema
+		'Me.txtdescripcionsistema.Text = mSistema.DescripcionSistema
+		Me.chkSeguridadWindows.Checked = mSistema.SeguridadWindows
+		Me.txtnombreusuario.Text = mSistema.UsuarioString
     Me.txtcontrasena.Text = mSistema.ContrasenaString
     Me.chkguardarcontrasena.Checked = mSistema.GuardarContrasena
 
