@@ -189,8 +189,8 @@ Public Class FrmListaBase
         excelApp.Dialogs(Excel.XlBuiltInDialog.xlDialogSendMail).Show()
         Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Excel y enviar por mail")
       ElseIf _output = EnumSalida.MailMerge Then
-        Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xls"
-        Try
+				Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xlsx"
+				Try
           Kill(rutfte)
         Catch ex As Exception
           Throw New Exception(String.Format("No se puede eliminar el archivo temporal {0), posiblemente esté en uso", rutfte))

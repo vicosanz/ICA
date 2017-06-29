@@ -162,7 +162,8 @@ Public Class FrmListaSimpleBase
         Return String.Empty
       End If
 
-      Dim excelApp As New Excel.Application
+			Dim empty As Boolean = True
+			Dim excelApp As New Excel.Application
       excelApp.Visible = False
       excelApp.ScreenUpdating = False
       Dim excelBook As Excel.Workbook = excelApp.Workbooks.Add
@@ -220,19 +221,23 @@ Public Class FrmListaSimpleBase
             _fila = -1
           End If
 
-          If data.Rows.Count > 3000 OrElse TabControl1.TabPages.Count > 3 Then
-            If data.Rows.Count > 0 Then
-              dg.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
-              dg.SelectAll()
-              Dim dataobj As DataObject = dg.GetClipboardContent
-              Clipboard.SetDataObject(dataobj, True)
-              dg.ClearSelection()
-              .Cells(_fila + 2, 1).select()
-              .Paste()
-            End If
-          Else
+					If empty AndAlso data.Rows.Count > 0 Then
+						empty = False
+					End If
 
-            For Each _row As DataRow In data.Rows
+					If data.Rows.Count > 1000 OrElse TabControl1.TabPages.Count > 3 Then
+						If data.Rows.Count > 0 Then
+							dg.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+							dg.SelectAll()
+							Dim dataobj As DataObject = dg.GetClipboardContent
+							Clipboard.SetDataObject(dataobj, True)
+							dg.ClearSelection()
+							.Cells(_fila + 2, 1).select()
+							.Paste()
+						End If
+					Else
+
+						For Each _row As DataRow In data.Rows
               _fila += 1
               Dim icol As Integer = 1
               For t As Integer = 1 To dg.ColumnCount
@@ -434,111 +439,112 @@ Public Class FrmListaSimpleBase
       Next
       excelBook.Worksheets(1).select()
       excelApp.ScreenUpdating = True
-      'excelWorksheet.PrintPreview()
-      'excelApp.Quit()
-      If _esTxt Then
-        'Dim _salida As String = "C:\Salida.txt"
-        Dim _salida As String = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "Salida.txt")
+			'excelWorksheet.PrintPreview()
+			'excelApp.Quit()
+			If _esTxt Then
+				'Dim _salida As String = "C:\Salida.txt"
+				Dim _salida As String = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "Salida.txt")
 
-        Try
-          Kill(_salida)
-        Catch ex As Exception
-          'Throw New Exception(String.Format("No se puede eliminar el archivo temporal {0), posiblemente esté en uso", _salida))
-        End Try
+				Try
+					Kill(_salida)
+				Catch ex As Exception
+					'Throw New Exception(String.Format("No se puede eliminar el archivo temporal {0), posiblemente esté en uso", _salida))
+				End Try
 
-        excelApp.Visible = False
-        excelApp.ActiveWorkbook.SaveAs(Filename:=_salida, FileFormat:=Excel.XlFileFormat.xlTextMSDOS, CreateBackup:=False)
-        Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Txt")
-        excelApp.ActiveWorkbook.Close(False)
-        excelApp.Quit()
+				excelApp.Visible = False
+				excelApp.ActiveWorkbook.SaveAs(Filename:=_salida, FileFormat:=Excel.XlFileFormat.xlTextMSDOS, CreateBackup:=False)
+				Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Txt")
+				excelApp.ActiveWorkbook.Close(False)
+				excelApp.Quit()
 
-        Process.Start(_salida)
+				Process.Start(_salida)
 
-        If mDespuesExportarTexto IsNot Nothing Then
-          mDespuesExportarTexto.Invoke(Me, Nothing)
-        End If
+				If mDespuesExportarTexto IsNot Nothing Then
+					mDespuesExportarTexto.Invoke(Me, Nothing)
+				End If
 
-        If _mostrarmensajes Then
-          'MsgBox(String.Format("Archivo generado correctamente en {0}", "C:\Salida.txt"), MsgBoxStyle.Information, "Información")
-          MsgBox(String.Format("Archivo generado correctamente en {0}", _salida), MsgBoxStyle.Information, "Información")
-        End If
-      ElseIf _output = EnumSalida.Correo Then
-        excelApp.Visible = True
-        excelApp.Dialogs(Excel.XlBuiltInDialog.xlDialogSendMail).Show()
-        Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Excel y enviar por mail")
+				If _mostrarmensajes Then
+					'MsgBox(String.Format("Archivo generado correctamente en {0}", "C:\Salida.txt"), MsgBoxStyle.Information, "Información")
+					MsgBox(String.Format("Archivo generado correctamente en {0}", _salida), MsgBoxStyle.Information, "Información")
+				End If
+			ElseIf _output = EnumSalida.Correo Then
+				excelApp.Visible = True
+				excelApp.Dialogs(Excel.XlBuiltInDialog.xlDialogSendMail).Show()
+				Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Excel y enviar por mail")
 
-      ElseIf _output = EnumSalida.Archivo Then
-        excelApp.Visible = False
-        Dim rutfte As String = ""
+			ElseIf _output = EnumSalida.Archivo Then
+				excelApp.Visible = False
+				Dim rutfte As String = ""
+				If Not empty Then
+					If String.IsNullOrEmpty(_archivosalida) Then
+						rutfte = String.Format("{0}{1}", My.Computer.FileSystem.GetTempFileName.ToLower.Replace(".tmp", ""), ".xlsx")
+					Else
+						rutfte = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, _archivosalida + ".xlsx")
+						Dim ok As Boolean = False
+						Dim intento As Integer = 0
+						While Not ok
+							If IO.File.Exists(rutfte) Then
+								Try
+									IO.File.Delete(rutfte)
+									ok = True
+								Catch ex As Exception
+									ok = False
+									intento += 1
+									rutfte = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, _archivosalida + intento.ToString.Trim + ".xlsx")
+								End Try
+							Else
+								ok = True
+							End If
+						End While
+					End If
 
-        If String.IsNullOrEmpty(_archivosalida) Then
-          rutfte = String.Format("{0}{1}", My.Computer.FileSystem.GetTempFileName.ToLower.Replace(".tmp", ""), ".xlsx")
-        Else
-          rutfte = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, _archivosalida + ".xlsx")
-          Dim ok As Boolean = False
-          Dim intento As Integer = 0
-          While Not ok
-            If System.IO.File.Exists(rutfte) Then
-              Try
-                System.IO.File.Delete(rutfte)
-                ok = True
-              Catch ex As Exception
-                ok = False
-                intento += 1
-                rutfte = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, _archivosalida + intento.ToString.Trim + ".xlsx")
-              End Try
-            Else
-              ok = True
-            End If
-          End While
-        End If
+					excelBook.SaveAs(Filename:=rutfte)
+					'excelBook.SaveAs(Filename:=rutfte, FileFormat:=Excel.XlFileFormat.xlExcel5)
+					excelBook.Close()
+					excelApp.Quit()
+					Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a archivo")
+				End If
+				Return rutfte
 
-        excelBook.SaveAs(Filename:=rutfte)
-        'excelBook.SaveAs(Filename:=rutfte, FileFormat:=Excel.XlFileFormat.xlExcel5)
-        excelBook.Close()
-        excelApp.Quit()
-        Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a archivo")
-        Return rutfte
+			ElseIf _output = EnumSalida.MailMerge Then
+				Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xlsx"
+				Try
+					If My.Computer.FileSystem.FileExists(rutfte) Then
+						Kill(rutfte)
+					End If
+				Catch ex As Exception
+					Throw New Exception(String.Format("No se puede eliminar el archivo temporal {0), posiblemente esté en uso", rutfte))
+				End Try
 
-      ElseIf _output = EnumSalida.MailMerge Then
-        Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xlsx"
-        Try
-          If My.Computer.FileSystem.FileExists(rutfte) Then
-            Kill(rutfte)
-          End If
-        Catch ex As Exception
-          Throw New Exception(String.Format("No se puede eliminar el archivo temporal {0), posiblemente esté en uso", rutfte))
-        End Try
+				excelBook.SaveAs(Filename:=rutfte)
+				'excelBook.SaveAs(Filename:=rutfte, FileFormat:=Excel.XlFileFormat.xlExcel5)
+				excelBook.Close()
+				excelApp.Quit()
 
-        excelBook.SaveAs(Filename:=rutfte)
-        'excelBook.SaveAs(Filename:=rutfte, FileFormat:=Excel.XlFileFormat.xlExcel5)
-        excelBook.Close()
-        excelApp.Quit()
+				Dim WordApp As New Word.Application
+				Dim WordDocument As Word.Document = WordApp.Documents.Open(_docmerge)
+				'WordDocument.MailMerge.Destination = Word.WdMailMergeDestination.wdSendToNewDocument
+				WordApp.Visible = True
+				WordDocument.Activate()
+				With WordDocument.MailMerge
+					.OpenDataSource(Name:=rutfte, Connection:="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & rutfte & ";", SQLStatement:="SELECT * FROM `" & Me.TabControl1.TabPages(0).Text & "$`")
+					.ViewMailMergeFieldCodes = False
+					.Destination = 0        'nuevo documento
+					.SuppressBlankLines = True
+					With .DataSource
+						.FirstRecord = 1
+						.LastRecord = -16
+					End With
+					.Execute(Pause:=False)
+				End With
+				WordDocument.ActiveWindow.Close()
 
-        Dim WordApp As New Word.Application
-        Dim WordDocument As Word.Document = WordApp.Documents.Open(_docmerge)
-        'WordDocument.MailMerge.Destination = Word.WdMailMergeDestination.wdSendToNewDocument
-        WordApp.Visible = True
-        WordDocument.Activate()
-        With WordDocument.MailMerge
-          .OpenDataSource(Name:=rutfte, Connection:="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & rutfte & ";", SQLStatement:="SELECT * FROM `" & Me.TabControl1.TabPages(0).Text & "$`")
-          .ViewMailMergeFieldCodes = False
-          .Destination = 0        'nuevo documento
-          .SuppressBlankLines = True
-          With .DataSource
-            .FirstRecord = 1
-            .LastRecord = -16
-          End With
-          .Execute(Pause:=False)
-        End With
-        WordDocument.ActiveWindow.Close()
-
-        Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Excel y combinó correspondencia")
-      Else
-        excelApp.Visible = True
-        Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Excel")
-      End If
-    Catch ex As Exception
+				Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Excel y combinó correspondencia")
+			Else
+				excelApp.Visible = True
+				Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a Excel")
+			End If
+		Catch ex As Exception
       If _mostrarmensajes Then
         MsgBox("Error al exporta a Microsoft Excel. " & ex.Message, MsgBoxStyle.Critical, "Error")
       End If
@@ -727,47 +733,46 @@ Public Class FrmListaSimpleBase
     End Set
   End Property
 
-  Public Sub EnviarAutoMail(Optional OriginalMessage As Microsoft.Office.Interop.Outlook.MailItem = Nothing)
-    RaiseEvent Actualizar(Me, Nothing)
+	Public Sub EnviarAutoMail(Optional OriginalMessage As Outlook.MailItem = Nothing)
+		RaiseEvent Actualizar(Me, Nothing)
 
-    If String.IsNullOrEmpty(AutoMailLista) AndAlso OriginalMessage Is Nothing Then
-      Exit Sub
-    End If
+		If String.IsNullOrEmpty(AutoMailLista) AndAlso OriginalMessage Is Nothing Then
+			Exit Sub
+		End If
 
-    Me.Timer2.Enabled = False
-    Dim sSource As String = EnviarExcel(EnumSalida.Archivo, "", AutoMailArchivo, False)
-    If String.IsNullOrEmpty(sSource) OrElse Not System.IO.File.Exists(sSource) Then
-      Exit Sub
-    End If
+		Timer2.Enabled = False
+		Dim sSource As String = EnviarExcel(EnumSalida.Archivo, "", AutoMailArchivo, False)
+		If String.IsNullOrEmpty(sSource) OrElse Not IO.File.Exists(sSource) Then
+			Exit Sub
+		End If
 
-    Dim oApp As Outlook._Application
-    oApp = New Outlook.Application()
-    Dim oMsg As Outlook._MailItem
-    If OriginalMessage IsNot Nothing Then
-      oMsg = OriginalMessage.ReplyAll
-    Else
-      oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
-      oMsg.Subject = AutoMailAsunto
-      oMsg.Body = Me.Text
-      oMsg.To = AutoMailLista
-    End If
+		Dim oApp As Outlook._Application
+		oApp = New Outlook.Application()
+		Dim oMsg As Outlook._MailItem
+		If OriginalMessage IsNot Nothing Then
+			oMsg = OriginalMessage.ReplyAll
+		Else
+			oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
+			oMsg.Subject = AutoMailAsunto
+			oMsg.Body = Me.Text
+			oMsg.To = AutoMailLista
+		End If
 
-    Dim sDisplayName As String = "Archivo.xlsx"
-    Dim sBodyLen As String = oMsg.Body.Length
-    Dim oAttachs As Outlook.Attachments = oMsg.Attachments
-    Dim oAttach As Outlook.Attachment
-    oAttach = oAttachs.Add(sSource, , sBodyLen + 1, sDisplayName)
+		Dim sDisplayName As String = "Archivo.xlsx"
+		Dim sBodyLen As String = oMsg.Body.Length
+		Dim oAttachs As Outlook.Attachments = oMsg.Attachments
+		Dim oAttach As Outlook.Attachment
+		oAttach = oAttachs.Add(sSource, , sBodyLen + 1, sDisplayName)
 
-    oMsg.Send()
+		oMsg.Send()
 
-    oApp = Nothing
-    oMsg = Nothing
-    oAttach = Nothing
-    oAttachs = Nothing
+		oApp = Nothing
+		oMsg = Nothing
+		oAttach = Nothing
+		oAttachs = Nothing
+	End Sub
 
-  End Sub
-
-  Private Sub btnenviomails_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnenviomails.Click
+	Private Sub btnenviomails_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnenviomails.Click
     EnviarAutoMail()
   End Sub
 End Class

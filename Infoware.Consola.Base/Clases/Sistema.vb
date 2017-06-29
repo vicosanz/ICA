@@ -164,8 +164,8 @@ Public Class Sistema
   Public Function Probarconexion() As Boolean Implements ISistema.Probarconexion
     Try
       If SeguridadWindows Then
-        mUsuarioString = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()
-      Else
+				mUsuarioString = Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()
+			Else
         If mUsuarioString.Contains("\") Then
           Throw New Exception("No se permite la utilización del signo \ fuera del contexto de la Seguridad de Windows")
         End If
@@ -173,10 +173,11 @@ Public Class Sistema
 
       mUsuario = New Usuario(OperadorDatos, mUsuarioString)
       If Not SeguridadWindows Then
-        If Not mUsuario.VerificarPassword(mContrasenaString) Then
-          Throw New Exception("Error al autenticarse" & Environment.NewLine & "Posibles causas:" & Environment.NewLine & "Revise que tenga acceso al servidor, que el servidor de datos este activo " & Environment.NewLine & "y además que el usuario y la clave sean correctas")
-        End If
-      End If
+				If Not mUsuario.VerificarPassword(mContrasenaString) Then
+					Throw New Exception("Error al autenticarse" & Environment.NewLine & "Posibles causas:" & Environment.NewLine & "Revise que tenga acceso al servidor, que el servidor de datos este activo " & Environment.NewLine & "y además que el usuario y la clave sean correctas")
+				End If
+
+			End If
 
       If SistemaObjeto Is Nothing Then
         Throw New Exception(String.Format("Error al cargar aplicación {0}. Por favor vuelva a intentarlo más tarde o remueva la aplicación. {1}", NombrePublico, MensajeError))

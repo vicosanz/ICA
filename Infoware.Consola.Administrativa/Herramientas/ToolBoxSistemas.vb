@@ -139,19 +139,21 @@ Public Class ToolBoxSistemas
     End If
   End Sub
 
-  Sub modificarlogin()
-    If Me.treeView1.SelectedNode Is Nothing Then
-      Exit Sub
-    End If
-    Dim f As New FrmSistemasLogin
-    f.Sistema = Me.treeView1.SelectedNode.Tag
-    If f.ShowDialog() = Windows.Forms.DialogResult.OK Then
-      Me.treeView1.SelectedNode.Text = f.Sistema.NombrePublico
-      SistemaList.SerializeList(mSistemas, configFile)
-    End If
-  End Sub
+	Function modificarlogin()
+		If Me.treeView1.SelectedNode Is Nothing Then
+			Return False
+		End If
+		Dim f As New FrmSistemasLogin
+		f.Sistema = Me.treeView1.SelectedNode.Tag
+		If f.ShowDialog() = Windows.Forms.DialogResult.OK Then
+			Me.treeView1.SelectedNode.Text = f.Sistema.NombrePublico
+			SistemaList.SerializeList(mSistemas, configFile)
+			Return True
+		End If
+		Return False
+	End Function
 
-  Public Event AbrirSistema As EventHandler
+	Public Event AbrirSistema As EventHandler
 
   Private Sub treeView1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles treeView1.DoubleClick
     EjecutarSistema()
@@ -162,19 +164,17 @@ Public Class ToolBoxSistemas
       Exit Sub
     End If
     Dim _sistema As Sistema = Me.treeView1.SelectedNode.Tag
-    If Not _sistema.Probarconexion Then
-      modificarlogin()
+		If Not _sistema.Probarconexion Then
+			If Not modificarlogin() OrElse Not _sistema.Probarconexion Then
+				Me.treeView1.SelectedNode.ImageIndex = 1
+				Me.treeView1.SelectedNode.SelectedImageIndex = 1
 
-      If Not _sistema.Probarconexion Then
-        Me.treeView1.SelectedNode.ImageIndex = 1
-        Me.treeView1.SelectedNode.SelectedImageIndex = 1
+				MsgBox("No se puede iniciar sesión en este sistema", MsgBoxStyle.Critical, "Error")
+				Exit Sub
+			End If
+		End If
 
-        MsgBox("No se puede iniciar sesión en este sistema", MsgBoxStyle.Critical, "Error")
-        Exit Sub
-      End If
-    End If
-
-    Me.treeView1.SelectedNode.ImageIndex = 0
+		Me.treeView1.SelectedNode.ImageIndex = 0
     Me.treeView1.SelectedNode.SelectedImageIndex = 0
 
     RaiseEvent AbrirSistema(Me, Nothing)

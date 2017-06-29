@@ -48,30 +48,30 @@ Public Class Usuario
   End Property
 #End Region
 
-  'Empleado
-  'Public Overridable Property Empleado() As Empleado
-  '  Get
-  '    If Me.mEmpleado Is Nothing AndAlso Not Entida_Empleado = 0 Then
-  '      Try
-  '        Me.mEmpleado = New Empleado(OperadorDatos, Entida_Empleado)
-  '      Catch ex As Exception
-  '        Me.mEmpleado = Nothing
-  '      End Try
-  '    End If
-  '    Return Me.mEmpleado
-  '  End Get
-  '  Set(ByVal value As Empleado)
-  '    Me.mEmpleado = value
-  '    If value Is Nothing Then
-  '      Entida_Empleado = 0
-  '    Else
-  '      Entida_Empleado = value.Entida_Codigo
-  '    End If
-  '  End Set
-  'End Property
+	'Empleado
+	'Public Overridable Property Empleado() As Empleado
+	'  Get
+	'    If Me.mEmpleado Is Nothing AndAlso Not Entida_Empleado = 0 Then
+	'      Try
+	'        Me.mEmpleado = New Empleado(OperadorDatos, Entida_Empleado)
+	'      Catch ex As Exception
+	'        Me.mEmpleado = Nothing
+	'      End Try
+	'    End If
+	'    Return Me.mEmpleado
+	'  End Get
+	'  Set(ByVal value As Empleado)
+	'    Me.mEmpleado = value
+	'    If value Is Nothing Then
+	'      Entida_Empleado = 0
+	'    Else
+	'      Entida_Empleado = value.Entida_Codigo
+	'    End If
+	'  End Set
+	'End Property
 
 #Region "Constructores de la clase"
-  Public Sub New(ByVal _OperadorDatos As OperadorDatos, ByVal _EsNuevo As Boolean)
+	Public Sub New(ByVal _OperadorDatos As OperadorDatos, ByVal _EsNuevo As Boolean)
     MyBase.New()
     OperadorDatos = _OperadorDatos
     EsNuevo = _EsNuevo
@@ -193,20 +193,24 @@ Public Class Usuario
   End Function
 
   Public Overridable Function CambiarContrasena() As Boolean
-    Dim bReturn As Boolean
-    Dim sAccion As String = String.Empty
-    With OperadorDatos
-      .AgregarParametro("@accion", "MP")
-      .AgregarParametro("@Usuari_Codigo", Usuari_Codigo)
-      .AgregarParametro("@Usuari_Password", Usuari_Password)
-      .Procedimiento = _Procedimiento
-      bReturn = .Ejecutar()
-      .LimpiarParametros()
-    End With
-    Return bReturn
-  End Function
+		Dim dsResult As New DataTable
+		Dim bResult As Boolean
+		With OperadorDatos
+			.AgregarParametro("@accion", "MP")
+			.AgregarParametro("@Usuari_Codigo", Usuari_Codigo)
+			.AgregarParametro("@Usuari_Password", Usuari_Password)
+			.Procedimiento = _Procedimiento
+			bResult = .Ejecutar(dsResult)
+			.LimpiarParametros()
+		End With
+		If bResult AndAlso Not dsResult Is Nothing AndAlso dsResult.Rows.Count > 0 Then
+			Return CBool(dsResult.Rows(0)(0))
+		Else
+			Return False
+		End If
+	End Function
 
-  Public Overridable Function Eliminar() As Boolean Implements IRegla.Eliminar
+	Public Overridable Function Eliminar() As Boolean Implements IRegla.Eliminar
     Dim dsResult As New DataTable
     Dim bReturn As Boolean
     With OperadorDatos

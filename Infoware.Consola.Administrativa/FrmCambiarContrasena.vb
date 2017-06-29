@@ -13,30 +13,33 @@ Public Class FrmCambiarContrasena
     End Set
   End Property
 
-  Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
-    Try
-      If Me.txtnueva.Text = Me.txtconfirmar.Text Then
-        If Me.txtnueva.Text.Trim = String.Empty Then
-          Throw New Exception("La contraseña no puede estar en blanco")
-        End If
-        mUsuario.Usuari_Password = Me.txtnueva.Text.Trim
-        mUsuario.CambiarContrasena()
-        mUsuario.Usuari_CambiarContrasena = False
-        mUsuario.Guardar()
+	Private Sub OK_Click(ByVal sender As Object, ByVal e As EventArgs) Handles OK.Click
+		Try
+			If Me.txtnueva.Text = Me.txtconfirmar.Text Then
+				If Me.txtnueva.Text.Trim = String.Empty Then
+					Throw New Exception("La contraseña no puede estar en blanco")
+				End If
+				mUsuario.Usuari_Password = Me.txtnueva.Text.Trim
+				If Not mUsuario.CambiarContrasena() Then
+					Throw New Exception("La contraseña no pudo ser cambiada, debe ser diferente a las últimas ingresadas")
+				End If
+				mUsuario.Usuari_CambiarContrasena = False
+				mUsuario.Guardar()
 
-        Me.DialogResult = Windows.Forms.DialogResult.OK
-      Else
-        Throw New Exception("La contraseña nueva y la confirmación deben ser iguales. Por favor redigítelas")
-      End If
+				DialogResult = DialogResult.OK
+			Else
+				Throw New Exception("La contraseña nueva y la confirmación deben ser iguales. Por favor redigítelas")
+			End If
 
-    Catch ex As Exception
-      MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Información")
-    End Try
+		Catch ex As Exception
+			MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Información")
+		End Try
 
-  End Sub
+	End Sub
 
-  Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
+	Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
     mUsuario.Usuari_CambiarContrasena = False
-    mUsuario.Guardar()
-  End Sub
+		mUsuario.Guardar()
+		DialogResult = DialogResult.Cancel
+	End Sub
 End Class

@@ -320,8 +320,8 @@ Public Class DataGridViewAutoDiscover
       If _output = EnumSalida.Correo Then
         excelApp.Dialogs(Microsoft.Office.Interop.Excel.XlBuiltInDialog.xlDialogSendMail).Show()
       ElseIf _output = EnumSalida.MailMerge Then
-        Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xls"
-        Try
+				Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xlsx"
+				Try
           Kill(rutfte)
         Catch ex As Exception
           Throw New Exception(String.Format("No se puede eliminar el archivo temporal {0), posiblemente esté en uso", rutfte))

@@ -94,38 +94,40 @@ Public Class FrmSistemas
         If Not mSistema.SeguridadWindows AndAlso mSistema.Usuario.Usuari_CambiarContrasena Then
           Dim f As New FrmCambiarContrasena
           f.Usuario = mSistema.Usuario
-          f.ShowDialog()
-        End If
-
-        MsgBox("Todas las pruebas satisfactorias", MsgBoxStyle.Information, "Información")
+					If Not f.ShowDialog() = DialogResult.OK Then
+						Throw New Exception("Error al cambiar la contraseña")
+					End If
+				End If
+				MsgBox("Todas las pruebas satisfactorias", MsgBoxStyle.Information, "Información")
       End If
     Catch ex As Exception
-      MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-    End Try
+			MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+		End Try
   End Sub
 
-  Private Sub btnguardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnguardar.Click
-    Try
-      mapear_datos()
-      Me.DialogResult = Windows.Forms.DialogResult.OK
-    Catch ex As Exception
-      MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-    End Try
-  End Sub
+	Private Sub btnguardar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnguardar.Click
+		Try
+			mapear_datos()
+			DialogResult = DialogResult.OK
+		Catch ex As Exception
+			MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+			DialogResult = DialogResult.Cancel
+		End Try
+	End Sub
 
-  Private Sub btnexaminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnexaminar.Click
-    With Me.OpenFileDialog1
-      .Multiselect = False
-      .FileName = ""
-      .Filter = "Ejecutable compatible (*.exe)|*.exe|Libreria compatible (*.dll)|*.dll|Todos los archivos (*.*)|*.*"
+	Private Sub btnexaminar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnexaminar.Click
+		With Me.OpenFileDialog1
+			.Multiselect = False
+			.FileName = ""
+			.Filter = "Ejecutable compatible (*.exe)|*.exe|Libreria compatible (*.dll)|*.dll|Todos los archivos (*.*)|*.*"
 
-      If .ShowDialog = Windows.Forms.DialogResult.OK Then
-        Me.txtarchivoensamblado.Text = .FileNames(0)
-      End If
-    End With
-  End Sub
+			If .ShowDialog = Windows.Forms.DialogResult.OK Then
+				Me.txtarchivoensamblado.Text = .FileNames(0)
+			End If
+		End With
+	End Sub
 
-  Private Sub FrmSistemas_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+	Private Sub FrmSistemas_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
   
   End Sub
 
