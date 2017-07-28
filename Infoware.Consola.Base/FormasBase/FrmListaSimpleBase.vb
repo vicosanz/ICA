@@ -5,6 +5,7 @@ Imports Infoware.Reglas.General
 Imports System.Windows.Forms
 Imports Microsoft.Office.Interop.Excel
 Imports Infoware.Consola.Base.StructExcel
+Imports System.Linq
 
 Public Class FrmListaSimpleBase
   Public WriteOnly Property Titulo() As String
@@ -158,9 +159,21 @@ Public Class FrmListaSimpleBase
 
   Private Function EnviarExcel(Optional ByVal _output As EnumSalida = EnumSalida.Excel, Optional ByVal _docmerge As String = "", Optional ByVal _archivosalida As String = "", Optional ByVal _mostrarmensajes As Boolean = True) As String
     Try
-      If TabControl1.TabPages.Count = 0 Then 'evitar generar archivo en blanco
-        Return String.Empty
-      End If
+			If TabControl1.TabPages.Count = 0 Then 'evitar generar archivo en blanco
+				Return String.Empty
+			End If
+
+			Dim hasrows As Boolean = False
+			For Each _tab As TabPage In TabControl1.TabPages
+				Dim dg As DataGridView = _tab.Controls(0)
+				If (dg.RowCount > 0) Then
+					hasrows = True
+					Exit For
+				End If
+			Next
+			If Not hasrows Then
+				Return String.Empty
+			End If
 
 			Dim empty As Boolean = True
 			Dim excelApp As New Excel.Application
@@ -500,12 +513,11 @@ Public Class FrmListaSimpleBase
 
 					excelBook.SaveAs(Filename:=rutfte)
 					'excelBook.SaveAs(Filename:=rutfte, FileFormat:=Excel.XlFileFormat.xlExcel5)
-					excelBook.Close()
-					excelApp.Quit()
 					Auditoria.Registrar_Auditoria(Restriccion, Auditoria.enumTipoAccion.Impresion, "Exportar a archivo")
 				End If
+				excelBook.Close()
+				excelApp.Quit()
 				Return rutfte
-
 			ElseIf _output = EnumSalida.MailMerge Then
 				Dim rutfte As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\temp.xlsx"
 				Try
