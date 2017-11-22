@@ -63,13 +63,13 @@ Partial Public Class Usuario
 			Return Me.mUsuari_Password
 		End Get
 		Set(ByVal Value As String)
-			If Not String.IsNullOrWhiteSpace(Value) Then
-				Dim match As Match = Regex.Match(Value, "^(?=(.*\d){1})(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}$", RegexOptions.IgnoreCase)
-				If Not match.Success Then
-					Throw New Exception("La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial")
-				End If
-			End If
-			mUsuari_Password = Value
+      'If Not String.IsNullOrWhiteSpace(Value) Then
+      '	Dim match As Match = Regex.Match(Value, "^(?=(.*\d){1})(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}$", RegexOptions.IgnoreCase)
+      '	If Not match.Success Then
+      '		Throw New Exception("La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial")
+      '	End If
+      'End If
+      mUsuari_Password = Value
 			EsModificado = True
 		End Set
 	End Property
