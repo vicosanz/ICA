@@ -25,6 +25,7 @@ Partial Class FrmListaBase
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmListaBase))
     Me.pnlcuerpo = New System.Windows.Forms.Panel()
     Me.DataGridView1 = New Infoware.Consola.Base.DataGridViewAutoDiscover()
+    Me.DataGridViewTextBoxColumn42 = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.LinkAgregar = New System.Windows.Forms.LinkLabel()
     Me.Panel1 = New System.Windows.Forms.Panel()
     Me.HeaderStrip1 = New Infoware.Docking.HeaderStrip()
@@ -147,6 +148,7 @@ Partial Class FrmListaBase
     DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
     Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
     Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+    Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn42})
     Me.DataGridView1.DataSource = Me.ListBindingSource
     DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
     DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
@@ -167,6 +169,12 @@ Partial Class FrmListaBase
     Me.DataGridView1.Size = New System.Drawing.Size(778, 424)
     Me.DataGridView1.StandardTab = True
     Me.DataGridView1.TabIndex = 1
+    '
+    'DataGridViewTextBoxColumn42
+    '
+    Me.DataGridViewTextBoxColumn42.HeaderText = "No existen registros a presentar"
+    Me.DataGridViewTextBoxColumn42.Name = "DataGridViewTextBoxColumn42"
+    Me.DataGridViewTextBoxColumn42.ReadOnly = True
     '
     'LinkAgregar
     '
@@ -744,7 +752,7 @@ Partial Class FrmListaBase
     Me.VerToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
     Me.VerToolStripMenuItem.MergeIndex = 2
     Me.VerToolStripMenuItem.Name = "VerToolStripMenuItem"
-    Me.VerToolStripMenuItem.Size = New System.Drawing.Size(36, 20)
+    Me.VerToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
     Me.VerToolStripMenuItem.Text = "&Ver"
     '
     'ActualizarToolStripMenuItem
@@ -881,4 +889,5 @@ Partial Class FrmListaBase
   Friend WithEvents DataGridViewTextBoxColumn39 As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents DataGridViewTextBoxColumn40 As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents DataGridViewTextBoxColumn41 As System.Windows.Forms.DataGridViewTextBoxColumn
+  Friend WithEvents DataGridViewTextBoxColumn42 As DataGridViewTextBoxColumn
 End Class

@@ -569,7 +569,9 @@ Public Class FrmLista
         End Select
         Dim _resultado As New List(Of Integer)
         For t As Integer = 3 To _dssubtotales.Columns.Count - 1
-          _resultado.Add(CInt(_row(t)))
+          If (Not TypeOf (_row(t)) Is DBNull) Then
+            _resultado.Add(CInt(_row(t)))
+          End If
         Next
         _structsubtotal.CamposResultado = _resultado
         _struct.Subtotales.Add(_structsubtotal)

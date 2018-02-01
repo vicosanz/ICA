@@ -49,6 +49,7 @@ Public Class FrmListaBase
     Set(ByVal value As Boolean)
       Me.LinkAgregar.Visible = value
       Me.NuevoToolStripMenuItem.Visible = value
+      Me.LinkAgregar.Visible = value
     End Set
   End Property
 
