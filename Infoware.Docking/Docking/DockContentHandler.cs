@@ -263,19 +263,26 @@ namespace Infoware.Docking
 
 				if (m_dockPanel != null)
 				{
-					m_dockPanel.AddContent(Content);
-					Form.TopLevel = false;
-					Form.FormBorderStyle = FormBorderStyle.None;
-					Form.ShowInTaskbar = false;
-                    Form.WindowState = FormWindowState.Normal;
-					NativeMethods.SetWindowPos(Form.Handle, IntPtr.Zero, 0, 0, 0, 0,
-						Win32.FlagsSetWindowPos.SWP_NOACTIVATE |
-						Win32.FlagsSetWindowPos.SWP_NOMOVE |
-						Win32.FlagsSetWindowPos.SWP_NOSIZE |
-						Win32.FlagsSetWindowPos.SWP_NOZORDER |
-						Win32.FlagsSetWindowPos.SWP_NOOWNERZORDER |
-						Win32.FlagsSetWindowPos.SWP_FRAMECHANGED);
-				}
+                    try
+                    {
+                        m_dockPanel.AddContent(Content);
+                        Form.TopLevel = false;
+                        Form.FormBorderStyle = FormBorderStyle.None;
+                        Form.ShowInTaskbar = false;
+                        Form.WindowState = FormWindowState.Normal;
+                        NativeMethods.SetWindowPos(Form.Handle, IntPtr.Zero, 0, 0, 0, 0,
+                            Win32.FlagsSetWindowPos.SWP_NOACTIVATE |
+                            Win32.FlagsSetWindowPos.SWP_NOMOVE |
+                            Win32.FlagsSetWindowPos.SWP_NOSIZE |
+                            Win32.FlagsSetWindowPos.SWP_NOZORDER |
+                            Win32.FlagsSetWindowPos.SWP_NOOWNERZORDER |
+                            Win32.FlagsSetWindowPos.SWP_FRAMECHANGED);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
 			}
 		}
 
