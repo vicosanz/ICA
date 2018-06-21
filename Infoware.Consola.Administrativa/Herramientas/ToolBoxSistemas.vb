@@ -55,8 +55,12 @@ Public Class ToolBoxSistemas
     My.Computer.FileSystem.CreateDirectory(mDirectorioConfig)
 
     configFile = Path.Combine(mDirectorioConfig, "Sistemas.config")
+    Dim existe As Boolean = My.Computer.FileSystem.FileExists(configFile)
     Try
       mSistemas = SistemaList.DeSerializeList(configFile)
+      If existe AndAlso mSistemas.Count = 0 Then
+        Throw New Exception(String.Format("El archivo de configuración {0} está dañado", configFile))
+      End If
 
       If mCargarArgumentos AndAlso My.Application.CommandLineArgs.Count > 0 Then
         For Each _arg As String In My.Application.CommandLineArgs
@@ -110,7 +114,8 @@ Public Class ToolBoxSistemas
         End If
       Next
     Catch ex As Exception
-      mSistemas = New SistemaList
+      MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+      End
     End Try
   End Sub
 

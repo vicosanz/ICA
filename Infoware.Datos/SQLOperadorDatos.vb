@@ -87,10 +87,11 @@ Public Class SQLOperadorDatos
   Public Overrides ReadOnly Property Comando() As DbCommand
     Get
       If mComando Is Nothing Then
-        mComando = New SqlCommand
-        mComando.CommandType = CommandType.StoredProcedure
-        mComando.Connection = Conexion
-        mComando.CommandTimeout = 180
+        mComando = New SqlCommand With {
+          .CommandType = CommandType.StoredProcedure,
+          .Connection = Conexion,
+          .CommandTimeout = 360
+        }
       End If
       Return mComando
     End Get

@@ -25,7 +25,11 @@ Public Class FrmPrincipal
     mToolBoxModulos.Show(DockPanel1)
     mToolBoxSistemas.Show(DockPanel1)
 
-    DockPanel1.SaveAsXml(configFile)
+    Try
+      DockPanel1.SaveAsXml(configFile)
+    Catch ex As Exception
+
+    End Try
     CloseAllDocuments()
   End Sub
 

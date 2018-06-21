@@ -244,6 +244,10 @@ Public Class SistemaList
   Inherits System.ComponentModel.BindingList(Of Sistema)
 
   Public Shared Sub SerializeList(ByVal _SistemaList As SistemaList, ByVal filename As String)
+    If _SistemaList.Count = 0 Then
+      My.Computer.FileSystem.DeleteFile(filename)
+      Exit Sub
+    End If
     Dim x As XmlSerializer = New XmlSerializer(GetType(SistemaList), New Type() {GetType(SQLOperadorDatos), GetType(SybaseOperadorDatos)})
 
     Dim writer As TextWriter = New StreamWriter(filename)
@@ -253,16 +257,13 @@ Public Class SistemaList
 
   Public Shared Function DeSerializeList(ByVal filename As String) As SistemaList
     Dim oResult As New SistemaList
-    Try
-      Dim myFileStream As FileStream = New FileStream(filename, FileMode.Open)
-      Dim reader As New XmlTextReader(myFileStream)
-      Dim serializer As New XmlSerializer(GetType(SistemaList), New Type() {GetType(SQLOperadorDatos), GetType(SybaseOperadorDatos)})
-      If serializer.CanDeserialize(reader) Then
-        oResult = serializer.Deserialize(reader)
-      End If
-      myFileStream.Close()
-    Catch ex As Exception
-    End Try
+    Dim myFileStream As FileStream = New FileStream(filename, FileMode.Open)
+    Dim reader As New XmlTextReader(myFileStream)
+    Dim serializer As New XmlSerializer(GetType(SistemaList), New Type() {GetType(SQLOperadorDatos), GetType(SybaseOperadorDatos)})
+    If serializer.CanDeserialize(reader) Then
+      oResult = serializer.Deserialize(reader)
+    End If
+    myFileStream.Close()
     Return oResult
   End Function
 End Class
