@@ -57,7 +57,11 @@ Public Class ToolBoxSistemas
     configFile = Path.Combine(mDirectorioConfig, "Sistemas.config")
     Dim existe As Boolean = My.Computer.FileSystem.FileExists(configFile)
     Try
-      mSistemas = SistemaList.DeSerializeList(configFile)
+      If existe Then
+        mSistemas = SistemaList.DeSerializeList(configFile)
+      Else
+        mSistemas = New SistemaList()
+      End If
       If existe AndAlso mSistemas.Count = 0 Then
         Throw New Exception(String.Format("El archivo de configuración {0} está dañado", configFile))
       End If

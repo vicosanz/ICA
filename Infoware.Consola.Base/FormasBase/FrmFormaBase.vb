@@ -56,12 +56,14 @@ Public Class FrmFormaBase
 
   Private Sub FrmMantenimientoSimpleBase_ParentChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ParentChanged
     Try
-      If TypeOf Me.Parent Is MdiClient Then
-        Me.MainMenuStrip.Visible = False
-      Else
-        Me.MainMenuStrip.Visible = True
-      End If
-    Catch ex As Exception
+            If TypeOf Me.Parent Is MdiClient Then
+                Me.MainMenuStrip.Visible = False
+            Else
+                If Not Me.MainMenuStrip Is Nothing Then
+                    Me.MainMenuStrip.Visible = True
+                End If
+            End If
+        Catch ex As Exception
 
     End Try
   End Sub
